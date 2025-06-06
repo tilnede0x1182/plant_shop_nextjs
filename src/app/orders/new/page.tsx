@@ -1,43 +1,56 @@
-"use client"
-import { useEffect, useState, FormEvent } from "react"
+"use client";
+import { useEffect, useState, FormEvent } from "react";
 
 export default function OrderNewPage() {
-	const [cartItems, setCartItems] = useState<any[]>([])
-	const [loading, setLoading] = useState(true)
-	const [alert, setAlert] = useState("")
+	const [cartItems, setCartItems] = useState<any[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [alert, setAlert] = useState("");
 
 	useEffect(() => {
-		// Simulation de récupération du panier depuis localStorage ou contexte
-		const stored = localStorage.getItem("cart")
-		if (stored) setCartItems(JSON.parse(stored))
-		setLoading(false)
-	}, [])
+		// Récupérer le panier depuis localStorage, puis le normaliser en tableau
+		const stored = localStorage.getItem("cart");
+		if (stored) {
+			let parsed = JSON.parse(stored);
+			// Si c'est un objet, prendre ses valeurs ; si c'est déjà un tableau, le garder tel quel
+			if (
+				!Array.isArray(parsed) &&
+				typeof parsed === "object" &&
+				parsed !== null
+			) {
+				parsed = Object.values(parsed);
+			}
+			setCartItems(parsed);
+		}
+		setLoading(false);
+	}, []);
 
-	function handleSubmit(e: FormEvent<HTMLFormElement>) {
-		e.preventDefault()
+	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+		e.preventDefault();
 		const items = cartItems.map(({ id, quantity }) => ({
 			plant_id: id,
-			quantity
-		}))
-		fetch("/api/orders", {
+			quantity,
+		}));
+		const userId = 1; // à remplacer par l’ID user réel si besoin
+		const res = await fetch("/api/orders", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ items })
-		})
-			.then(res => {
-				if (res.ok) {
-					localStorage.removeItem("cart")
-					window.location.href = "/orders"
-				} else {
-					return res.json().then(data => {
-						setAlert(data.message || "Erreur lors de la validation de la commande.")
-					})
-				}
-			})
-			.catch(() => setAlert("Erreur lors de la validation de la commande."))
+			body: JSON.stringify({ items, userId }),
+		});
+		if (res.ok) {
+			localStorage.removeItem("cart");
+			window.location.href = "/orders";
+		} else {
+			const data = await res.json();
+			setAlert(
+				data.message || "Erreur lors de la validation de la commande."
+			);
+		}
 	}
 
-	if (loading) return <p className="alert alert-info">Chargement de votre panier...</p>
+	if (loading)
+		return (
+			<p className="alert alert-info">Chargement de votre panier...</p>
+		);
 
 	return (
 		<div>
@@ -50,7 +63,7 @@ export default function OrderNewPage() {
 					<p className="alert alert-info">Votre panier est vide.</p>
 				) : (
 					<ul>
-						{cartItems.map(item => (
+						{cartItems.map((item) => (
 							<li key={item.id}>
 								{item.name} × {item.quantity}
 							</li>
@@ -65,5 +78,5 @@ export default function OrderNewPage() {
 				</button>
 			</form>
 		</div>
-	)
+	);
 }
