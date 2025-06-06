@@ -1,26 +1,13 @@
-// src/app/components/Navbar.tsx
-
 "use client";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import dynamic from "next/dynamic";
-
-const CartLink = dynamic(
-	() =>
-		Promise.resolve(function CartLink() {
-			return (
-				<a href="/cart" className="nav-link" id="cart-link">
-					Mon Panier
-				</a>
-			);
-		}),
-	{ ssr: false }
-);
+import { useEffect, useState } from "react";
 
 // Navbar avec gestion utilisateur et rôle admin
 export default function Navbar() {
 	const { data: session } = useSession();
 	const user = session?.user;
+	const [nombreArticles, setNombreArticles] = useState<number | null>(null);
 
 	const isAdmin = user?.admin === true;
 
@@ -31,6 +18,18 @@ export default function Navbar() {
 					.map((s) => s.charAt(0).toUpperCase() + s.slice(1))
 					.join(" ")
 			: "";
+
+	useEffect(() => {
+		if (typeof window === "undefined") return;
+		try {
+			const panier = JSON.parse(localStorage.getItem("cart") || "{}");
+			let total = 0;
+			for (const key in panier) total += panier[key].quantity;
+			setNombreArticles(total);
+		} catch {
+			setNombreArticles(0);
+		}
+	}, []);
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark custom-navbar">
@@ -56,8 +55,20 @@ export default function Navbar() {
 							</li>
 						)}
 						<li className="nav-item">
-							<CartLink />
+							<Link
+								href="/cart"
+								className="nav-link"
+								id="cart-link"
+							>
+								Mon Panier
+								<span suppressHydrationWarning={true}>
+									{nombreArticles && nombreArticles > 0
+										? ` (${nombreArticles})`
+										: ""}
+								</span>
+							</Link>
 						</li>
+
 						{user ? (
 							<>
 								<li className="nav-item">
@@ -66,7 +77,10 @@ export default function Navbar() {
 									</Link>
 								</li>
 								<li className="nav-item">
-									<Link href={`/users/${user.id}`} className="nav-link">
+									<Link
+										href={`/users/${user.id}`}
+										className="nav-link"
+									>
 										Mon Profil
 									</Link>
 								</li>
@@ -82,12 +96,18 @@ export default function Navbar() {
 										</a>
 										<ul className="dropdown-menu">
 											<li>
-												<Link href="/admin/plants" className="dropdown-item">
+												<Link
+													href="/admin/plants"
+													className="dropdown-item"
+												>
 													Gestion des Plantes
 												</Link>
 											</li>
 											<li>
-												<Link href="/admin/users" className="dropdown-item">
+												<Link
+													href="/admin/users"
+													className="dropdown-item"
+												>
 													Gestion des Utilisateurs
 												</Link>
 											</li>
@@ -107,12 +127,18 @@ export default function Navbar() {
 						) : (
 							<>
 								<li className="nav-item">
-									<Link href="/auth/register" className="nav-link">
+									<Link
+										href="/auth/register"
+										className="nav-link"
+									>
 										S'inscrire
 									</Link>
 								</li>
 								<li className="nav-item">
-									<Link href="/auth/signin" className="nav-link">
+									<Link
+										href="/auth/signin"
+										className="nav-link"
+									>
 										Se connecter
 									</Link>
 								</li>
