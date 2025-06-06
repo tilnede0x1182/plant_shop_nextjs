@@ -23,7 +23,7 @@ export default function SignInPage() {
 	return (
 		<div className="container mt-4">
 			<h1>Se Connecter</h1>
-			<form onSubmit={handleSubmit} className="mt-3">
+			<form onSubmit={handleSubmit} className="mt-3 w-100" style={{ maxWidth: '500px' }}>
 				<div className="mb-3">
 					<label className="form-label">Email</label>
 					<input
