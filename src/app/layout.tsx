@@ -24,7 +24,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					</div>
 				</Providers>
 				<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" />
-				<script src="/javascripts/application.js" />
+				{/* <script src="/javascripts/application.js" /> */}
+				<script src="/javascripts/application.js"></script>
 			</body>
 		</html>
 	)

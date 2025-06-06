@@ -1,21 +1,36 @@
-"use client"
-import Link from "next/link"
-import { useSession, signOut } from "next-auth/react"
+// src/app/components/Navbar.tsx
+
+"use client";
+import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
+import dynamic from "next/dynamic";
+
+const CartLink = dynamic(
+	() =>
+		Promise.resolve(function CartLink() {
+			return (
+				<a href="/cart" className="nav-link" id="cart-link">
+					Mon Panier
+				</a>
+			);
+		}),
+	{ ssr: false }
+);
 
 // Navbar avec gestion utilisateur et rôle admin
 export default function Navbar() {
-	const { data: session } = useSession()
-	const user = session?.user
+	const { data: session } = useSession();
+	const user = session?.user;
 
-	const isAdmin = user?.admin === true
+	const isAdmin = user?.admin === true;
 
 	const capitalizeName = (name?: string) =>
 		name
 			? name
 					.split(" ")
-					.map(s => s.charAt(0).toUpperCase() + s.slice(1))
+					.map((s) => s.charAt(0).toUpperCase() + s.slice(1))
 					.join(" ")
-			: ""
+			: "";
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark custom-navbar">
@@ -41,9 +56,7 @@ export default function Navbar() {
 							</li>
 						)}
 						<li className="nav-item">
-							<Link href="/cart" className="nav-link" id="cart-link">
-								Mon Panier
-							</Link>
+							<CartLink />
 						</li>
 						{user ? (
 							<>
@@ -109,5 +122,5 @@ export default function Navbar() {
 				</div>
 			</div>
 		</nav>
-	)
+	);
 }
