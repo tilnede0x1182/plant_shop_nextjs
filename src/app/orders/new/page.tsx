@@ -62,13 +62,41 @@ export default function OrderNewPage() {
 				{cartItems.length === 0 ? (
 					<p className="alert alert-info">Votre panier est vide.</p>
 				) : (
-					<ul>
-						{cartItems.map((item) => (
-							<li key={item.id}>
-								{item.name} × {item.quantity}
-							</li>
-						))}
-					</ul>
+					<table className="table shadow">
+						<thead className="table-light">
+							<tr>
+								<th>Plante</th>
+								<th>Quantité</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							{cartItems.map((item) => (
+								<tr key={item.id}>
+									<td>
+										<a
+											href={`/plants/${item.id}`}
+											className="cart-plant-link"
+										>
+											{item.name}
+										</a>
+									</td>
+									<td>{item.quantity}</td>
+									<td>{item.price * item.quantity} €</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				)}
+				{cartItems.length > 0 && (
+					<p className="text-end fw-bold">
+						Total :{" "}
+						{cartItems.reduce(
+							(t, item) => t + item.price * item.quantity,
+							0
+						)}
+						 €
+					</p>
 				)}
 			</div>
 
