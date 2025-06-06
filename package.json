@@ -19,15 +19,14 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "ts-node": "^10.9.2",
-    "typescript": "^5",
-		"@types/bcryptjs": "^2.4.2"
-
+    "typescript": "^5"
   },
   "prisma": {
-     "seed": "ts-node -P tsconfig.seed.json prisma/seed.ts"
+    "seed": "ts-node -P tsconfig.seed.json prisma/seed.ts"
   }
 }
