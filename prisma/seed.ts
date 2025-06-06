@@ -9,6 +9,7 @@ import { join } from 'node:path'
 const NB_ADMINS	= 3
 const NB_USERS	= 20
 const NB_PLANTS	= 30
+const MAX_ORDERS_PER_USER = 7
 const PLANT_NAMES = [
 	'Rose','Tulipe','Lavande','Orchidée','Basilic','Menthe','Pivoine','Tournesol',
 	'Cactus (Echinopsis)','Bambou','Camomille (Matricaria recutita)','Sauge (Salvia officinalis)',
@@ -99,7 +100,12 @@ class SeedService {
 
 	// ## Orders
 	private createOrders = async (plants: Plant[]) => {
-		for (const user of await this.prisma.user.findMany()) await this.createOrderForUser(user, plants)
+		for (const user of await this.prisma.user.findMany()) {
+			const numberOfOrders = faker.number.int({ min: 0, max: MAX_ORDERS_PER_USER })
+			for (let idx = 0; idx < numberOfOrders; idx++) {
+				await this.createOrderForUser(user, plants)
+			}
+		}
 	}
 
 	private createOrderForUser = async (user: User, plants: Plant[]) => {
