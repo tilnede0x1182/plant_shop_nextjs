@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.9.0",
+    "@faker-js/faker": "^8.4.1",
     "next": "15.3.3",
     "next-auth": "^4.24.11",
     "prisma": "^6.9.0",
@@ -20,6 +21,10 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }
