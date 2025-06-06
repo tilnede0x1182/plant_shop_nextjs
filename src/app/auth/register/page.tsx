@@ -32,7 +32,7 @@ export default function RegisterPage() {
 	return (
 		<div className="container mt-4">
 			<h1>S'inscrire</h1>
-			<form onSubmit={handleSubmit} className="mt-3">
+			<form onSubmit={handleSubmit} className="mt-3 w-100" style={{ maxWidth: '500px' }}>
 				<div className="mb-3">
 					<label htmlFor="email" className="form-label">
 						Email

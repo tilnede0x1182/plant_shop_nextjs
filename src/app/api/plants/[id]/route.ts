@@ -4,7 +4,8 @@ import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
-  const id = Number(params.id)
+  const { id: paramId } = await params
+  const id = Number(paramId)
   const plant = await prisma.plant.findUnique({ where: { id } })
   if (!plant) return NextResponse.json({ error: "Plant not found" }, { status: 404 })
   return NextResponse.json(plant)
