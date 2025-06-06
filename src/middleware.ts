@@ -8,9 +8,8 @@ export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret })
   const url = req.nextUrl.clone()
 
-  if (!token && url.pathname.startsWith("/admin")) {
-    url.pathname = "/api/auth/signin"
-    return NextResponse.redirect(url)
+  if (!token && req.nextUrl.pathname.startsWith("/admin")) {
+    return NextResponse.redirect(new URL('/auth/signin', req.url))
   }
 
   if (token && !token.admin && url.pathname.startsWith("/admin")) {
