@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 
 export async function GET() {
   const orders = await prisma.order.findMany({
-    include: { orderItems: true }
+		include: { orderItems: { include: { plant: true } } }
   })
   return NextResponse.json(orders)
 }
