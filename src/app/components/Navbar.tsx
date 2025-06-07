@@ -76,7 +76,6 @@ export default function Navbar() {
 								</span>
 							</Link>
 						</li>
-
 						{user ? (
 							<>
 								<li className="nav-item">
@@ -122,15 +121,13 @@ export default function Navbar() {
 										</ul>
 									</li>
 								)}
-								<li className="nav-item">
-									<button
-										onClick={() => signOut()}
-										className="nav-link btn btn-link"
-										style={{ padding: 0, border: "none" }}
-									>
-										Déconnexion
-									</button>
-								</li>
+								<button
+									onClick={() => signOut()}
+									className="nav-link bg-transparent border-0 p-0"
+									type="button"
+								>
+									Déconnexion
+								</button>
 							</>
 						) : (
 							<>
