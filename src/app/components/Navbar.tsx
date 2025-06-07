@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 // Navbar avec gestion utilisateur et rôle admin
 export default function Navbar() {
@@ -33,12 +34,10 @@ export default function Navbar() {
 			}
 		}
 
-		// au montage
 		updateCount();
-		// à chaque modif déclenchée par CartProvider
 		window.addEventListener("storage", updateCount);
 		return () => window.removeEventListener("storage", updateCount);
-	}, []);
+	}, [usePathname()]);
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark custom-navbar">
