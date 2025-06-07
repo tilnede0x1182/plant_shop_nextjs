@@ -24,6 +24,9 @@ export async function POST(request: Request) {
 		return NextResponse.json({ error: "Payload invalide" }, { status: 400 })
 	}
 	let total = 0
+	console.log('userId utilisé pour la commande =', userId);
+	const allUsers = await prisma.user.findMany();
+	console.log("Tous les users présents (id) :", allUsers.map(u => u.id));
 	const order = await prisma.order.create({
 		data: { userId, status: "confirmed", totalPrice: 0 }
 	})
