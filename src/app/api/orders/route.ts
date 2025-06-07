@@ -5,7 +5,7 @@ import { authOptions } from "../auth/[...nextauth]/route";
 
 const prisma = new PrismaClient();
 
-export async function GET(request: Request) {
+export async function GET() {
 	const session = await getServerSession(authOptions);
 	if (!session?.user?.id) {
 		return NextResponse.json([], { status: 401 });
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
 	}
 	let total = 0
 	// console.log('userId utilisé pour la commande =', userId);
-	const allUsers = await prisma.user.findMany();
+	// const allUsers = await prisma.user.findMany();
 	// console.log("Tous les users présents (id) :", allUsers.map(u => u.id));
 	const order = await prisma.order.create({
 		data: { userId, status: "confirmed", totalPrice: 0 }

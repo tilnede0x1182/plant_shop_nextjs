@@ -31,7 +31,7 @@ export default function RegisterPage() {
 
 	return (
 		<div className="container mt-4">
-			<h1>S'inscrire</h1>
+			<h1>S&apos;inscrire</h1>
 			<form onSubmit={handleSubmit} className="mt-3 w-100" style={{ maxWidth: '500px' }}>
 				<div className="mb-3">
 					<label htmlFor="email" className="form-label">
@@ -87,7 +87,7 @@ export default function RegisterPage() {
 				</div>
 				{error && <div className="alert alert-danger">{error}</div>}
 				<button type="submit" className="btn btn-primary">
-					S'inscrire
+					S&apos;inscrire
 				</button>
 			</form>
 		</div>

@@ -138,7 +138,7 @@ export default function Navbar() {
 										href="/auth/register"
 										className="nav-link"
 									>
-										S'inscrire
+										S&apos;inscrire
 									</Link>
 								</li>
 								<li className="nav-item">

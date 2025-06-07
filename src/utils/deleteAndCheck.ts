@@ -15,7 +15,7 @@ export async function deleteAndCheck(deleteUrl: string, checkUrl: string, succes
 			// console.log(`Erreur : ressource ${deleteUrl} existe encore en base.`)
 		}
 	} else {
-		const data = await res.json().catch(() => ({}))
+		// const data = await res.json().catch(() => ({}))
 		// console.log("Erreur suppression :", data.error || "erreur inconnue")
 	}
 }

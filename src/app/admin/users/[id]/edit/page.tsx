@@ -65,7 +65,7 @@ export default function AdminUserEditPage() {
 
 	return (
 		<div className="container mt-4">
-			<h1>Modifier l'utilisateur</h1>
+			<h1>Modifier l&apos;utilisateur</h1>
 
 			{errors.length > 0 && (
 				<div className="alert alert-danger">

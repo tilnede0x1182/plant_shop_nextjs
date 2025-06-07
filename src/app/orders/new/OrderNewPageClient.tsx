@@ -1,45 +1,56 @@
-"use client"
+"use client";
 
-import { useEffect, useState, FormEvent } from "react"
+import { useEffect, useState, FormEvent } from "react";
 
 export default function OrderNewPageClient({ userId }: { userId: number }) {
-	const [cartItems, setCartItems] = useState<any[]>([])
-	const [loading, setLoading] = useState(true)
-	const [alert, setAlert] = useState("")
+	type CartItem = {
+		id: number;
+		name: string;
+		price: number;
+		quantity: number;
+	};
+	const [cartItems, setCartItems] = useState<CartItem[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [alert, setAlert] = useState("");
 
 	useEffect(() => {
-		const stored = localStorage.getItem("cart")
+		const stored = localStorage.getItem("cart");
 		if (stored) {
-			let parsed = JSON.parse(stored)
+			let parsed = JSON.parse(stored);
 			if (!Array.isArray(parsed) && typeof parsed === "object") {
-				parsed = Object.values(parsed)
+				parsed = Object.values(parsed);
 			}
-			setCartItems(parsed)
+			setCartItems(parsed);
 		}
-		setLoading(false)
-	}, [])
+		setLoading(false);
+	}, []);
 
 	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-		e.preventDefault()
+		e.preventDefault();
 		const items = cartItems.map(({ id, quantity }) => ({
 			plant_id: id,
 			quantity,
-		}))
+		}));
 		const res = await fetch("/api/orders", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({ items, userId }),
-		})
+		});
 		if (res.ok) {
-			localStorage.removeItem("cart")
-			window.location.href = "/orders"
+			localStorage.removeItem("cart");
+			window.location.href = "/orders";
 		} else {
-			const data = await res.json()
-			setAlert(data.message || "Erreur lors de la validation de la commande.")
+			const data = await res.json();
+			setAlert(
+				data.message || "Erreur lors de la validation de la commande."
+			);
 		}
 	}
 
-	if (loading) return <p className="alert alert-info">Chargement de votre panier...</p>
+	if (loading)
+		return (
+			<p className="alert alert-info">Chargement de votre panier...</p>
+		);
 
 	return (
 		<div>
@@ -62,7 +73,10 @@ export default function OrderNewPageClient({ userId }: { userId: number }) {
 							{cartItems.map((item) => (
 								<tr key={item.id}>
 									<td>
-										<a href={`/plants/${item.id}`} className="cart-plant-link">
+										<a
+											href={`/plants/${item.id}`}
+											className="cart-plant-link"
+										>
 											{item.name}
 										</a>
 									</td>
@@ -76,7 +90,11 @@ export default function OrderNewPageClient({ userId }: { userId: number }) {
 				{cartItems.length > 0 && (
 					<p className="text-end fw-bold">
 						Total :{" "}
-						{cartItems.reduce((t, item) => t + item.price * item.quantity, 0)} €
+						{cartItems.reduce(
+							(t, item) => t + item.price * item.quantity,
+							0
+						)}
+						 €
 					</p>
 				)}
 			</div>
@@ -87,5 +105,5 @@ export default function OrderNewPageClient({ userId }: { userId: number }) {
 				</button>
 			</form>
 		</div>
-	)
+	);
 }
