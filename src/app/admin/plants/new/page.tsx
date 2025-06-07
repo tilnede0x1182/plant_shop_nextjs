@@ -1,5 +1,5 @@
 "use client"
-import PlantForm from "./PlantForm"
+import PlantForm from "../PlantForm"
 
 export default function AdminPlantNewPage() {
 	return (

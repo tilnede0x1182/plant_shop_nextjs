@@ -13,7 +13,7 @@ export default function AdminPlantsPage() {
 	const [plants, setPlants] = useState<Plant[]>([])
 
 	useEffect(() => {
-		fetch("/api/plants")
+		fetch("/api/admin/plants")
 			.then(res => res.json())
 			.then(data => setPlants(data))
 	}, [])

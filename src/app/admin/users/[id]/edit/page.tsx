@@ -117,7 +117,7 @@ export default function AdminUserEditPage() {
 						onChange={handleChange}
 					/>
 					<label htmlFor="admin" className="form-check-label">
-						Administrateur ?
+						Administrateur
 					</label>
 				</div>
 

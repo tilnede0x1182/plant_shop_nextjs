@@ -1,5 +1,5 @@
 "use client"
-import PlantForm from "../PlantForm"
+import PlantForm from "../../PlantForm"
 import { useParams } from "next/navigation"
 
 export default function AdminPlantEditPage() {
