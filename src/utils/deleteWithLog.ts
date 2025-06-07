@@ -8,12 +8,12 @@ export async function deleteWithLog(prisma: any, type: "plant" | "user", id: num
 	try {
 		if (type === "plant") {
 			await prisma.plant.delete({ where: { id } })
-			console.log(`Suppression réussie plante id=${id}`)
+			// console.log(`Suppression réussie plante id=${id}`)
 		} else if (type === "user") {
 			await prisma.user.delete({ where: { id } })
-			console.log(`Suppression réussie utilisateur id=${id}`)
+			// console.log(`Suppression réussie utilisateur id=${id}`)
 		} else {
-			throw new Error("Type de suppression non supporté")
+			// throw new Error("Type de suppression non supporté")
 		}
 		return { ok: true }
 	} catch (error) {
