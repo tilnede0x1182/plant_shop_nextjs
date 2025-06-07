@@ -1,3 +1,5 @@
+prod:
+	npm run build && npm start
 run:
 	PORT=3100 npm run dev
 
