@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { deleteAndCheck } from "@/utils/deleteAndCheck"
 
 type Plant = {
 	id: number
@@ -57,8 +58,11 @@ export default function AdminPlantsPage() {
 										className="btn btn-danger btn-sm"
 										onClick={async () => {
 											if (!confirm("Supprimer cette plante ?")) return
-											await fetch(`/api/admin/plants/${plant.id}`, { method: "DELETE" })
-											setPlants(plants.filter(p => p.id !== plant.id))
+											await deleteAndCheck(
+												`/api/admin/plants/${plant.id}`,
+												`/api/plants/${plant.id}`,
+												() => setPlants(plants.filter(p => p.id !== plant.id))
+											)
 										}}
 									>
 										🗑 Supprimer

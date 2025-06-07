@@ -2,6 +2,7 @@
 import Link from "next/link"
 import { useParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import { deleteAndCheck } from "@/utils/deleteAndCheck"
 
 type Plant = {
 	id: number
@@ -54,22 +55,20 @@ export default function PlantShowPage() {
 							<Link href={`/admin/plants/${plant.id}/edit`} className="btn btn-warning">
 								Modifier
 							</Link>
-							<form
-								action={`/api/admin/plants/${plant.id}`}
-								method="POST"
-								onSubmit={e => {
-									e.preventDefault()
+							<button
+								type="button"
+								className="btn btn-danger"
+								onClick={async () => {
 									if (!confirm("Supprimer cette plante ?")) return
-									fetch(`/api/admin/plants/${plant.id}`, {
-										method: "DELETE"
-									}).then(() => router.push("/plants"))
+									await deleteAndCheck(
+										`/api/admin/plants/${plant.id}`,
+										`/api/plants/${plant.id}`,
+										() => router.push("/plants")
+									)
 								}}
-								className="d-inline"
 							>
-								<button type="submit" className="btn btn-danger">
-									Supprimer
-								</button>
-							</form>
+								Supprimer
+							</button>
 						</>
 					)}
 				</div>
