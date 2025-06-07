@@ -63,5 +63,6 @@ Elle propose une interface publique pour les utilisateurs et un espace d'adminis
 
 ```bash
 npm install
-npx prisma db:create db:migrate db:seed
+npx prisma migrate dev
+npx prisma db seed
 npm run dev
