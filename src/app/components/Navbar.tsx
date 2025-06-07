@@ -21,14 +21,23 @@ export default function Navbar() {
 
 	useEffect(() => {
 		if (typeof window === "undefined") return;
-		try {
-			const panier = JSON.parse(localStorage.getItem("cart") || "{}");
-			let total = 0;
-			for (const key in panier) total += panier[key].quantity;
-			setNombreArticles(total);
-		} catch {
-			setNombreArticles(0);
+
+		function updateCount() {
+			try {
+				const panier = JSON.parse(localStorage.getItem("cart") || "{}");
+				let total = 0;
+				for (const key in panier) total += panier[key].quantity;
+				setNombreArticles(total);
+			} catch {
+				setNombreArticles(0);
+			}
 		}
+
+		// au montage
+		updateCount();
+		// à chaque modif déclenchée par CartProvider
+		window.addEventListener("storage", updateCount);
+		return () => window.removeEventListener("storage", updateCount);
 	}, []);
 
 	return (
