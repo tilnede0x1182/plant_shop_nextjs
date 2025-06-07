@@ -1,6 +1,26 @@
 "use client"
-import { SessionProvider } from "next-auth/react"
+
+import { SessionProvider, useSession, signOut } from "next-auth/react"
+import { useEffect } from "react"
+
+function SessionChecker() {
+	const { data: session } = useSession()
+
+	useEffect(() => {
+		if (!session?.user?.id) return
+		fetch(`/api/users/${session.user.id}`).then((res) => {
+			if (!res.ok) signOut()
+		})
+	}, [session?.user?.id])
+
+	return null
+}
 
 export function Providers({ children }: { children: React.ReactNode }) {
-	return <SessionProvider>{children}</SessionProvider>
+	return (
+		<SessionProvider>
+			<SessionChecker />
+			{children}
+		</SessionProvider>
+	)
 }
