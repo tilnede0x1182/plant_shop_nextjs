@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const STORAGE_KEY = "cart";
 
@@ -293,9 +294,8 @@ export default function CartProvider() {
 		if (typeof window === "undefined") return;
 		if (!(window as any).cartInstance) {
 			(window as any).cartInstance = new Cart();
-			(window as any).cartInstance.renderOrderReview();
-			(window as any).cartInstance.render();
 		}
-	}, []);
-	return null;
+		(window as any).cartInstance.renderOrderReview();
+		(window as any).cartInstance.render();
+	}, [usePathname()]);
 }
