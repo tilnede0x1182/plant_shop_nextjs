@@ -3,7 +3,13 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-type CartItem = { id: number; name: string; price: number; quantity: number; stock: number };
+type CartItem = {
+	id: number;
+	name: string;
+	price: number;
+	quantity: number;
+	stock: number;
+};
 type CartObject = Record<string, CartItem>;
 
 const STORAGE_KEY = "cart";
@@ -21,7 +27,11 @@ function saveCart(cart: CartObject) {
 	window.dispatchEvent(new Event("cart-updated"));
 }
 
-function createNode(tag: string, props: Record<string, unknown> = {}, ...children: (string | Node)[]) {
+function createNode(
+	tag: string,
+	props: Record<string, unknown> = {},
+	...children: (string | Node)[]
+) {
 	const el = document.createElement(tag);
 	if (props.dataset) {
 		for (const [k, v] of Object.entries(props.dataset)) el.dataset[k] = v;
@@ -64,7 +74,7 @@ function updateNavbarCount(cart: CartObject) {
 	const link = document.getElementById("cart-link");
 	if (link) {
 		const n = Object.values(cart).reduce(
-			(t: number, i: any) => t + i.quantity,
+			(t: number, i: CartItem) => t + i.quantity,
 			0
 		);
 		link.textContent = `Mon Panier${n ? ` (${n})` : ""}`;
@@ -75,10 +85,10 @@ class Cart {
 	get() {
 		return loadCart();
 	}
-	save(c: any) {
+	save(c: CartObject) {
 		saveCart(c);
 	}
-	commit(c: any) {
+	commit(c: CartObject) {
 		this.save(c);
 		window.dispatchEvent(new Event("storage"));
 	}
@@ -132,8 +142,11 @@ class Cart {
 	}
 
 	delayedUpdate(id: number, input: HTMLInputElement) {
-		clearTimeout((input as any)._t);
-		(input as any)._t = setTimeout(() => this.update(id, input.value), 300);
+		const inputWithTimer = input as HTMLInputElement & {
+			_t?: NodeJS.Timeout;
+		};
+		clearTimeout(inputWithTimer._t);
+		inputWithTimer._t = setTimeout(() => this.update(id, input.value), 300);
 	}
 
 	renderOrderReview(
@@ -167,9 +180,9 @@ class Cart {
 			),
 			tbody
 		);
-		let total = 0,
-			items: any[] = [];
-		for (const [pid, item] of Object.entries(cart)) {
+		const items: { plant_id: number; quantity: number }[] = [];
+		let total = 0;
+		for (const [pid, item] of Object.entries(cart as CartObject)) {
 			const sub = item.price * item.quantity;
 			total += sub;
 			tbody.append(
@@ -301,13 +314,11 @@ class Cart {
 export default function CartProvider() {
 	useEffect(() => {
 		if (typeof window === "undefined") return;
-		if (!(window as any).cartInstance) {
-			// console.log("CartProvider: instanciation cartInstance");
-			(window as any).cartInstance = new Cart();
+		if (!(window as { cartInstance?: Cart }).cartInstance) {
+			(window as { cartInstance?: Cart }).cartInstance = new Cart();
 		}
-		// console.log("CartProvider: renderOrderReview & render");
-		(window as any).cartInstance.renderOrderReview();
-		(window as any).cartInstance.render();
+		(window as { cartInstance: Cart }).cartInstance.renderOrderReview();
+		(window as { cartInstance: Cart }).cartInstance.render();
 	}, [usePathname()]);
 	return null;
 }
