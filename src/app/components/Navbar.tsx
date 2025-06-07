@@ -28,6 +28,7 @@ export default function Navbar() {
 				const panier = JSON.parse(localStorage.getItem("cart") || "{}");
 				let total = 0;
 				for (const key in panier) total += panier[key].quantity;
+				// console.log("Navbar: updateCount appelé, total =", total);
 				setNombreArticles(total);
 			} catch {
 				setNombreArticles(0);
@@ -36,8 +37,14 @@ export default function Navbar() {
 
 		updateCount();
 		window.addEventListener("storage", updateCount);
-		return () => window.removeEventListener("storage", updateCount);
+		window.addEventListener("cart-updated", updateCount);
+		return () => {
+			window.removeEventListener("storage", updateCount);
+			window.removeEventListener("cart-updated", updateCount);
+		};
 	}, [usePathname()]);
+
+	// console.log("Navbar: render, nombreArticles =", nombreArticles);
 
 	return (
 		<nav className="navbar navbar-expand-lg navbar-dark custom-navbar">
@@ -68,12 +75,7 @@ export default function Navbar() {
 								className="nav-link"
 								id="cart-link"
 							>
-								Mon Panier
-								<span suppressHydrationWarning={true}>
-									{nombreArticles && nombreArticles > 0
-										? ` (${nombreArticles})`
-										: ""}
-								</span>
+								{`Mon Panier${typeof nombreArticles === "number" && nombreArticles > 0 ? ` (${nombreArticles})` : ""}`}
 							</Link>
 						</li>
 						{user ? (

@@ -12,9 +12,12 @@ function loadCart() {
 		return {};
 	}
 }
+
 function saveCart(cart: any) {
 	localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+	window.dispatchEvent(new Event("cart-updated"));
 }
+
 function createNode(tag: string, props: any = {}, ...children: any[]) {
 	const el = document.createElement(tag);
 	if (props.dataset) {
@@ -29,6 +32,7 @@ function createNode(tag: string, props: any = {}, ...children: any[]) {
 		);
 	return el;
 }
+
 function showStockAlert(name: string, stock: number) {
 	const alert = createNode(
 		"div",
@@ -52,6 +56,7 @@ function showStockAlert(name: string, stock: number) {
 		setTimeout(() => alert.remove(), 300);
 	}, 3000);
 }
+
 function updateNavbarCount(cart: any) {
 	const link = document.getElementById("cart-link");
 	if (link) {
@@ -76,6 +81,7 @@ class Cart {
 	}
 
 	add(id: number, name: string, price: number, stock: number) {
+		// console.log("Cart: add() appelé", id, name, price, stock);
 		const c = this.get();
 		c[id] ??= { id, name, price, quantity: 0, stock };
 		if (c[id].quantity >= stock) {
@@ -293,9 +299,12 @@ export default function CartProvider() {
 	useEffect(() => {
 		if (typeof window === "undefined") return;
 		if (!(window as any).cartInstance) {
+			// console.log("CartProvider: instanciation cartInstance");
 			(window as any).cartInstance = new Cart();
 		}
+		// console.log("CartProvider: renderOrderReview & render");
 		(window as any).cartInstance.renderOrderReview();
 		(window as any).cartInstance.render();
 	}, [usePathname()]);
+	return null;
 }

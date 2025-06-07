@@ -9,13 +9,13 @@ export async function deleteAndCheck(deleteUrl: string, checkUrl: string, succes
 	if (res.ok) {
 		const check = await fetch(checkUrl)
 		if (check.status === 404) {
-			console.log(`Suppression réussie : ${deleteUrl}`)
+			// console.log(`Suppression réussie : ${deleteUrl}`)
 			successCallback()
 		} else {
-			console.log(`Erreur : ressource ${deleteUrl} existe encore en base.`)
+			// console.log(`Erreur : ressource ${deleteUrl} existe encore en base.`)
 		}
 	} else {
 		const data = await res.json().catch(() => ({}))
-		console.log("Erreur suppression :", data.error || "erreur inconnue")
+		// console.log("Erreur suppression :", data.error || "erreur inconnue")
 	}
 }
