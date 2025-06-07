@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { deleteAndCheck } from "@/utils/deleteAndCheck"
 
 type User = {
 	id: number
@@ -59,8 +60,11 @@ export default function AdminUsersPage() {
 										className="btn btn-danger btn-sm"
 										onClick={async () => {
 											if (!confirm("Supprimer cet utilisateur ?")) return
-											await fetch(`/api/admin/users/${user.id}`, { method: "DELETE" })
-											setUsers(users.filter(u => u.id !== user.id))
+											await deleteAndCheck(
+												`/api/admin/users/${user.id}`,
+												`/api/users/${user.id}`,
+												() => setUsers(users.filter(u => u.id !== user.id))
+											)
 										}}
 									>
 										🗑 Supprimer
