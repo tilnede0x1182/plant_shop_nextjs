@@ -12,14 +12,14 @@ export async function GET(request: Request, { params }: { params: { id: string }
 }
 
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
-  const id = Number(params.id)
+  const id = Number((await params).id)
   const data = await request.json()
   const plant = await prisma.plant.update({ where: { id }, data })
   return NextResponse.json(plant)
 }
 
-export async function DELETE({ params }: { params: { id: string } }) {
-  const id = Number(params.id)
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+  const id = Number((await params).id)
   await prisma.plant.delete({ where: { id } })
   return NextResponse.json({ message: "Plant deleted" })
 }

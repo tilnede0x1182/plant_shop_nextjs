@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
 export async function GET(request: Request, { params }: { params: { id: string } }) {
-  const id = Number(params.id)
+  const id = Number((await params).id)
   const order = await prisma.order.findUnique({
     where: { id },
     include: { orderItems: true }
@@ -14,14 +14,14 @@ export async function GET(request: Request, { params }: { params: { id: string }
 }
 
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
-  const id = Number(params.id)
+  const id = Number((await params).id)
   const data = await request.json()
   const order = await prisma.order.update({ where: { id }, data })
   return NextResponse.json(order)
 }
 
-export async function DELETE({ params }: { params: { id: string } }) {
-  const id = Number(params.id)
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+  const id = Number((await params).id)
   await prisma.order.delete({ where: { id } })
   return NextResponse.json({ message: "Order deleted" })
 }
