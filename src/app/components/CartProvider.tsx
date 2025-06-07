@@ -3,6 +3,9 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
+type CartItem = { id: number; name: string; price: number; quantity: number; stock: number };
+type CartObject = Record<string, CartItem>;
+
 const STORAGE_KEY = "cart";
 
 function loadCart() {
@@ -13,12 +16,12 @@ function loadCart() {
 	}
 }
 
-function saveCart(cart: any) {
+function saveCart(cart: CartObject) {
 	localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
 	window.dispatchEvent(new Event("cart-updated"));
 }
 
-function createNode(tag: string, props: any = {}, ...children: any[]) {
+function createNode(tag: string, props: Record<string, unknown> = {}, ...children: (string | Node)[]) {
 	const el = document.createElement(tag);
 	if (props.dataset) {
 		for (const [k, v] of Object.entries(props.dataset)) el.dataset[k] = v;
@@ -57,7 +60,7 @@ function showStockAlert(name: string, stock: number) {
 	}, 3000);
 }
 
-function updateNavbarCount(cart: any) {
+function updateNavbarCount(cart: CartObject) {
 	const link = document.getElementById("cart-link");
 	if (link) {
 		const n = Object.values(cart).reduce(

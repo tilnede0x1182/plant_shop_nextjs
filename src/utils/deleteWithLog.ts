@@ -4,7 +4,7 @@
   @type "plant" | "user"
   @id identifiant numérique à supprimer
 */
-export async function deleteWithLog(prisma: any, type: "plant" | "user", id: number) {
+export async function deleteWithLog(prisma: { plant: any; user: any }, type: "plant" | "user", id: number) {
 	try {
 		if (type === "plant") {
 			await prisma.plant.delete({ where: { id } })
