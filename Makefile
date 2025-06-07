@@ -1,3 +1,11 @@
+typage:
+	npx tsc --noEmit
+
+lint:
+	npm run lint
+
+typage_lint: lint typage
+
 prod:
 	npm run build && npm start
 run:
