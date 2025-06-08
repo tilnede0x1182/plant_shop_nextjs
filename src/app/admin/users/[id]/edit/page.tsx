@@ -1,67 +1,68 @@
-"use client"
-import { useEffect, useState, FormEvent } from "react"
-import { useParams, useRouter } from "next/navigation"
+"use client";
+import { useEffect, useState, FormEvent } from "react";
+import { useParams, useRouter } from "next/navigation";
 
 type UserForm = {
-	email: string
-	name: string
-	admin: boolean
-}
+	email: string;
+	name: string;
+	admin: boolean;
+};
 
-type Errors = string[]
+type Errors = string[];
 
 export default function AdminUserEditPage() {
-	const params = useParams()
-	const router = useRouter()
+	const params = useParams();
+	const router = useRouter();
 	const [form, setForm] = useState<UserForm>({
 		email: "",
 		name: "",
-		admin: false
-	})
-	const [errors, setErrors] = useState<Errors>([])
-	const [loading, setLoading] = useState(true)
+		admin: false,
+	});
+	const [errors, setErrors] = useState<Errors>([]);
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		if (!params?.id) return
+		if (!params?.id) return;
 		fetch(`/api/users/${params.id}`)
-			.then(res => res.json())
-			.then(data => {
+			.then((res) => res.json())
+			.then((data) => {
 				setForm({
 					email: data.email || "",
 					name: data.name || "",
-					admin: data.admin || false
-				})
-				setLoading(false)
-			})
-	}, [params?.id])
+					admin: data.admin || false,
+				});
+				setLoading(false);
+			});
+	}, [params?.id]);
 
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
 	) => {
-		const { name, value, type, checked } = e.target
-		setForm(prev => ({
+		const target = e.target as HTMLInputElement;
+		const { name, value, type, checked } = target;
+		setForm((prev) => ({
 			...prev,
-			[name]: type === "checkbox" ? checked : value
-		}))
-	}
+			[name]: type === "checkbox" ? checked : value,
+		}));
+	};
 
 	const handleSubmit = async (e: FormEvent) => {
-		e.preventDefault()
-		if (!params?.id) return
+		e.preventDefault();
+		if (!params?.id) return;
 		const res = await fetch(`/api/users/${params.id}`, {
 			method: "PUT",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(form)
-		})
+			body: JSON.stringify(form),
+		});
 		if (res.ok) {
-			router.push("/admin/users")
+			router.push("/admin/users");
 		} else {
-			const data = await res.json()
-			setErrors(data.errors || ["Erreur lors de la mise à jour."])
+			const data = await res.json();
+			setErrors(data.errors || ["Erreur lors de la mise à jour."]);
 		}
-	}
+	};
 
-	if (loading) return <p>Chargement...</p>
+	if (loading) return <p>Chargement...</p>;
 
 	return (
 		<div className="container mt-4">
@@ -126,5 +127,5 @@ export default function AdminUserEditPage() {
 				</button>
 			</form>
 		</div>
-	)
+	);
 }

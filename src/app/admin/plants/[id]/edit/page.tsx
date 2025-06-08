@@ -7,7 +7,7 @@ export default function AdminPlantEditPage() {
 	return (
 		<div className="container mt-4">
 			<h1>Éditer la Plante</h1>
-			<PlantForm plantId={params?.id} />
+			<PlantForm plantId={Array.isArray(params?.id) ? params.id[0] : params?.id} />
 		</div>
 	)
 }
