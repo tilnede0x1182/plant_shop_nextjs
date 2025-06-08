@@ -35,7 +35,7 @@ export async function POST(request: Request) {
 		console.log("Utilisateur créé en base :", user); // log base
 		return NextResponse.json(user);
 	} catch (exception: unknown) {
-		if (exception.code === "P2002") {
+		if ((exception as any).code === "P2002") {
 			return NextResponse.json(
 				{ error: "Cet email existe déjà." },
 				{ status: 400 }
