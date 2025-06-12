@@ -23,7 +23,7 @@ export default function AdminPlantsPage() {
 		<div className="container mt-4">
 			<h1 className="mb-4">Gestion des Plantes</h1>
 			<div className="mb-3">
-				<Link href="/admin/plants/new" className="btn btn-outline-info">
+				<Link href="/admin/plants/new" className="btn btn-outline-success">
 					Nouvelle Plante
 				</Link>
 			</div>

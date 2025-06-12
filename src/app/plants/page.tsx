@@ -10,6 +10,10 @@ type Plant = {
 	stock: number;
 };
 
+type Cart = {
+	add: (id: number, name: string, price: number, stock: number) => void;
+};
+
 export default function PlantsPage() {
 	const [plants, setPlants] = useState<Plant[]>([]);
 	const [isAdmin, setIsAdmin] = useState(false);
@@ -31,7 +35,7 @@ export default function PlantsPage() {
 		<>
 			<h1 className="text-center mb-4">🌿 Liste des Plantes</h1>
 			{isAdmin && (
-				<Link href="/admin/plants/new" className="btn btn-info mb-3">
+				<Link href="/admin/plants/new" className="btn btn-success mb-3">
 					Nouvelle Plante
 				</Link>
 			)}
@@ -61,11 +65,14 @@ export default function PlantsPage() {
 								<button
 									className="btn btn-success w-100"
 									onClick={() => {
+										const win = window as unknown as {
+											cartInstance?: Cart;
+										};
 										if (
 											typeof window !== "undefined" &&
-											window.cartInstance
+											win.cartInstance
 										) {
-											window.cartInstance.add(
+											win.cartInstance.add(
 												plant.id,
 												plant.name,
 												plant.price,

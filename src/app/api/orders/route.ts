@@ -10,7 +10,8 @@ export async function GET() {
 	if (!session?.user?.id) {
 		return NextResponse.json([], { status: 401 });
 	}
-	const userId = Number(session.user.id);
+	const userId = Number((session.user as { id: string }).id
+);
 	const orders = await prisma.order.findMany({
 		where: { userId },
 		include: { orderItems: { include: { plant: true } } },

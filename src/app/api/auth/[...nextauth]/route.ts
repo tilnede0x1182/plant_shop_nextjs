@@ -1,11 +1,22 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions, DefaultSession, Session } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { JWT } from "next-auth/jwt";
 import { PrismaClient } from "@prisma/client";
-import bcrypt from "bcryptjs";
+import * as bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
 
-export const authOptions = {
+// Extend DefaultSession to add id and admin on user
+declare module "next-auth" {
+	interface Session extends DefaultSession {
+		user: DefaultSession["user"] & {
+			id: string;
+			admin?: boolean;
+		};
+	}
+}
+
+export const authOptions: NextAuthOptions = {
 	providers: [
 		CredentialsProvider({
 			name: "Credentials",
@@ -25,33 +36,34 @@ export const authOptions = {
 				);
 				if (!isValid) return null;
 				return {
-					id: user.id,
+					id: user.id.toString(),
 					email: user.email,
-					name: user.name,
+					name: user.name ?? undefined,
 					admin: user.admin,
 				};
 			},
 		}),
 	],
 	callbacks: {
-		async session({ session, token }) {
-			if (token)
-				session.user = {
-					id: token.id,
-					email: token.email,
-					name: token.name,
-					admin: token.admin,
-				};
-			return session;
-		},
-		async jwt({ token, user }) {
+		async jwt({ token, user }): Promise<JWT> {
 			if (user) {
-				token.id = user.id;
-				token.admin = user.admin;
-				token.email = user.email;
-				token.name = user.name;
+				type UserWithExtras = {
+					id: string;
+					admin?: boolean;
+				};
+
+				const u = user as UserWithExtras;
+				token.sub = u.id;
+				token.admin = u.admin;
 			}
 			return token;
+		},
+		async session({ session, token }): Promise<Session> {
+			// Cast so TS won’t complain about our additions
+			const u = session.user as Session["user"] & { id?: string; admin?: boolean };
+			if (token.sub) u.id = token.sub;
+			u.admin = token.admin as boolean;
+			return session;
 		},
 	},
 	session: { strategy: "jwt" },
