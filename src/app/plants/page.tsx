@@ -45,39 +45,28 @@ export default function PlantsPage() {
 						<div className="card mb-4 shadow-sm">
 							<div className="card-body">
 								<h5 className="card-title">
-									<Link
-										href={`/plants/${plant.id}`}
-										className="text-decoration-none text-dark"
-									>
+									<Link href={`/plants/${plant.id}`} className="text-decoration-none text-dark">
 										{plant.name}
 									</Link>
 								</h5>
 								<p className="card-text">
 									<strong>Prix :</strong> {plant.price} €
-									<br />
 									{isAdmin && (
 										<>
-											<strong>Stock :</strong>{" "}
-											{plant.stock} unités
+											<br />
+											<strong>Stock :</strong> {plant.stock} unités
 										</>
 									)}
 								</p>
+
 								<button
 									className="btn btn-success w-100"
 									onClick={() => {
 										const win = window as unknown as {
 											cartInstance?: Cart;
 										};
-										if (
-											typeof window !== "undefined" &&
-											win.cartInstance
-										) {
-											win.cartInstance.add(
-												plant.id,
-												plant.name,
-												plant.price,
-												plant.stock
-											);
+										if (typeof window !== "undefined" && win.cartInstance) {
+											win.cartInstance.add(plant.id, plant.name, plant.price, plant.stock);
 										}
 									}}
 								>

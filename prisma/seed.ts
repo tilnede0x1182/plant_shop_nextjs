@@ -8,7 +8,7 @@ import { join } from 'node:path'
 // # Données
 const NB_ADMINS	= 3
 const NB_USERS	= 20
-const NB_PLANTS	= 30
+const NB_PLANTS	= 60
 const MAX_ORDERS_PER_USER = 7
 const PLANT_NAMES = [
 	'Rose','Tulipe','Lavande','Orchidée','Basilic','Menthe','Pivoine','Tournesol',

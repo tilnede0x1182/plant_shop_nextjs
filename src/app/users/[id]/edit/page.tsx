@@ -41,6 +41,7 @@ export default function UserEditPage() {
 		})
 		if (res.ok) {
 			router.push(`/users/${params.id}`)
+			window.location.reload();
 		} else {
 			const data = await res.json()
 			setErrors(data.errors || ["Échec de la mise à jour de l'utilisateur."])

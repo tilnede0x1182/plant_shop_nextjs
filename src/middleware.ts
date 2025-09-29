@@ -1,38 +1,35 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
-import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
 const secret = process.env.NEXTAUTH_SECRET;
+
+// Routes accessibles sans authentification
+const publicRoutes = ["/", "/plants", "/auth/signin", "/auth/register", "/cart"];
 
 export async function middleware(req: NextRequest) {
 	const token = await getToken({ req, secret });
-	const url = req.nextUrl.clone();
+	const { pathname } = req.nextUrl;
 
-	// pas connecté → redirection login
-	if (!token && req.nextUrl.pathname.startsWith("/admin")) {
+	// Vérifie si la route est publique
+	const isPublic = publicRoutes.some((route) => pathname === route || (route === "/plants" && pathname.startsWith("/plants/")));
+
+	// Cas 1 : pas connecté et route non publique → redirection login
+	if (!token && !isPublic) {
 		return NextResponse.redirect(new URL("/auth/signin", req.url));
 	}
 
-	if (token) {
-		const user = await prisma.user.findUnique({ where: { id: Number(token.sub) } });
-
-		if (!user) {
-			// utilisateur supprimé en BDD → forcer login
-			return NextResponse.redirect(new URL("/auth/signin", req.url));
-		}
-
-		if (!user.admin && url.pathname.startsWith("/admin")) {
-			// utilisateur non admin → bloqué
-			url.pathname = "/unauthorized";
-			return NextResponse.redirect(url);
-		}
+	// Cas 2 : pas admin mais accès à /admin → redirection unauthorized
+	if (token && !token.admin && pathname.startsWith("/admin")) {
+		const url = req.nextUrl.clone();
+		url.pathname = "/unauthorized";
+		return NextResponse.redirect(url);
 	}
 
+	// OK → laisser passer
 	return NextResponse.next();
 }
 
 export const config = {
-	matcher: ["/admin/:path*"],
+	matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|css|js)).*)"],
 };
