@@ -1,6 +1,11 @@
 run:
-# PORT=3100 npm run dev
 	PORT=3100 npm start
+
+run-dev:
+	PORT=3100 npm run dev
+
+build:
+	npm run build
 
 seed:
 	npx prisma db seed

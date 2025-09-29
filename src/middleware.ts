@@ -1,25 +1,38 @@
-import { getToken } from "next-auth/jwt"
-import { NextResponse } from "next/server"
-import type { NextRequest } from "next/server"
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
+import { PrismaClient } from "@prisma/client";
 
-const secret = process.env.NEXTAUTH_SECRET
+const prisma = new PrismaClient();
+const secret = process.env.NEXTAUTH_SECRET;
 
 export async function middleware(req: NextRequest) {
-  const token = await getToken({ req, secret })
-  const url = req.nextUrl.clone()
+	const token = await getToken({ req, secret });
+	const url = req.nextUrl.clone();
 
-  if (!token && req.nextUrl.pathname.startsWith("/admin")) {
-    return NextResponse.redirect(new URL('/auth/signin', req.url))
-  }
+	// pas connecté → redirection login
+	if (!token && req.nextUrl.pathname.startsWith("/admin")) {
+		return NextResponse.redirect(new URL("/auth/signin", req.url));
+	}
 
-  if (token && !token.admin && url.pathname.startsWith("/admin")) {
-    url.pathname = "/unauthorized"
-    return NextResponse.redirect(url)
-  }
+	if (token) {
+		const user = await prisma.user.findUnique({ where: { id: Number(token.sub) } });
 
-  return NextResponse.next()
+		if (!user) {
+			// utilisateur supprimé en BDD → forcer login
+			return NextResponse.redirect(new URL("/auth/signin", req.url));
+		}
+
+		if (!user.admin && url.pathname.startsWith("/admin")) {
+			// utilisateur non admin → bloqué
+			url.pathname = "/unauthorized";
+			return NextResponse.redirect(url);
+		}
+	}
+
+	return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/admin/:path*"]
-}
+	matcher: ["/admin/:path*"],
+};

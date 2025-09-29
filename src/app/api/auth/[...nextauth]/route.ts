@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 // Extend DefaultSession to add id and admin on user
 declare module "next-auth" {
 	interface Session extends DefaultSession {
-		user: DefaultSession["user"] & {
+		user?: DefaultSession["user"] & {
 			id: string;
 			admin?: boolean;
 		};
@@ -30,10 +30,7 @@ export const authOptions: NextAuthOptions = {
 					where: { email: credentials.email },
 				});
 				if (!user) return null;
-				const isValid = await bcrypt.compare(
-					credentials.password,
-					user.password
-				);
+				const isValid = await bcrypt.compare(credentials.password, user.password);
 				if (!isValid) return null;
 				return {
 					id: user.id.toString(),
@@ -59,10 +56,23 @@ export const authOptions: NextAuthOptions = {
 			return token;
 		},
 		async session({ session, token }): Promise<Session> {
-			// Cast so TS won’t complain about our additions
-			const u = session.user as Session["user"] & { id?: string; admin?: boolean };
-			if (token.sub) u.id = token.sub;
-			u.admin = token.admin as boolean;
+			if (token.sub) {
+				// Vérifie en BDD que l’utilisateur existe encore
+				const user = await prisma.user.findUnique({ where: { id: Number(token.sub) } });
+				if (user) {
+					// met à jour la session depuis la BDD
+					session.user = {
+						...session.user,
+						id: user.id.toString(),
+						email: user.email,
+						name: user.name ?? undefined,
+						admin: user.admin,
+					};
+				} else {
+					// utilisateur supprimé → on invalide
+					delete session.user;
+				}
+			}
 			return session;
 		},
 	},

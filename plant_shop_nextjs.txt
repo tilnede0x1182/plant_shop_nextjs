@@ -1,0 +1,3112 @@
+
+# ARBORESCENCE
+#
+/home/tilnede0x1182/code/tilnede0x1182/Personnel/2025/Entrainement/plant_shop/Javascript/NextJS/plant_shop_nextjs
+├── Build
+├── Makefile
+├── next
+├── next.config.ts
+├── next-env.d.ts
+├── package.json
+├── package-lock.json
+├── plant_shop_nextjs@0.1.0
+├── prisma
+│   ├── migrations
+│   │   ├── 20250606000932_init
+│   │   │   └── migration.sql
+│   │   ├── 20250607050529_fk_orderitem_ondelete_cascade
+│   │   │   └── migration.sql
+│   │   ├── 20250607050902_fk_order_ondelete_cascade
+│   │   │   └── migration.sql
+│   │   ├── 20250607051212_fk_orderitem_ondelete_cascade_order
+│   │   │   └── migration.sql
+│   │   └── migration_lock.toml
+│   ├── schema.prisma
+│   └── seed.ts
+├── projet.txt
+├── public
+│   ├── favicon.ico
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── javascripts
+│   │   └── application_archive.js
+│   ├── next.svg
+│   ├── stylesheets
+│   │   └── application.css
+│   ├── vercel.svg
+│   └── window.svg
+├── README.md
+├── src
+│   ├── app
+│   │   ├── admin
+│   │   │   ├── plants
+│   │   │   │   ├── [id]
+│   │   │   │   │   └── edit
+│   │   │   │   │       └── page.tsx
+│   │   │   │   ├── new
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── page.tsx
+│   │   │   │   └── PlantForm.tsx
+│   │   │   └── users
+│   │   │       ├── [id]
+│   │   │       │   ├── edit
+│   │   │       │   │   └── page.tsx
+│   │   │       │   └── page.tsx
+│   │   │       └── page.tsx
+│   │   ├── api
+│   │   │   ├── admin
+│   │   │   │   ├── plants
+│   │   │   │   │   ├── [id]
+│   │   │   │   │   │   └── route.ts
+│   │   │   │   │   └── route.ts
+│   │   │   │   └── users
+│   │   │   │       └── [id]
+│   │   │   │           └── route.ts
+│   │   │   ├── auth
+│   │   │   │   └── [...nextauth]
+│   │   │   │       └── route.ts
+│   │   │   ├── orders
+│   │   │   │   ├── [id]
+│   │   │   │   │   └── route.ts
+│   │   │   │   └── route.ts
+│   │   │   ├── plants
+│   │   │   │   ├── [id]
+│   │   │   │   │   └── route.ts
+│   │   │   │   └── route.ts
+│   │   │   └── users
+│   │   │       ├── [id]
+│   │   │       │   └── route.ts
+│   │   │       └── route.ts
+│   │   ├── auth
+│   │   │   ├── register
+│   │   │   │   └── page.tsx
+│   │   │   └── signin
+│   │   │       └── page.tsx
+│   │   ├── BootstrapScript.tsx
+│   │   ├── cart
+│   │   │   └── page.tsx
+│   │   ├── components
+│   │   │   ├── CartProvider.tsx
+│   │   │   ├── FlashMessages.tsx
+│   │   │   └── Navbar.tsx
+│   │   ├── layout.tsx
+│   │   ├── orders
+│   │   │   ├── new
+│   │   │   │   ├── OrderNewPageClient.tsx
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── page.tsx
+│   │   ├── plants
+│   │   │   ├── [id]
+│   │   │   │   ├── edit
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── page.tsx
+│   │   │   ├── new
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   ├── providers.tsx
+│   │   └── users
+│   │       └── [id]
+│   │           ├── edit
+│   │           │   └── page.tsx
+│   │           └── page.tsx
+│   ├── middleware.ts
+│   └── utils
+│       ├── deleteAndCheck.ts
+│       └── deleteWithLog.ts
+├── tsconfig.json
+├── tsconfig.seed.json
+├── tsconfig.tsbuildinfo
+└── users.txt
+
+49 directories, 68 files
+
+# CONFIG
+#
+## package.json
+
+{
+  "name": "plant_shop_nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "@prisma/client": "^6.9.0",
+    "bcryptjs": "^2.4.3",
+    "next": "15.3.3",
+    "next-auth": "^4.24.11",
+    "prisma": "^6.9.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "9.28.0",
+    "eslint-config-next": "15.3.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "ts-node -P tsconfig.seed.json prisma/seed.ts"
+  }
+}
+
+
+## next.config.ts
+
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+};
+
+export default nextConfig;
+
+
+## tsconfig.json
+
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", ".next"],
+}
+
+
+## .env
+
+# Environment variables declared in this file are automatically made available to Prisma.
+# See the documentation for more detail: https://pris.ly/d/prisma-schema#accessing-environment-variables-from-the-schema
+
+# Prisma supports the native connection string format for PostgreSQL, MySQL, SQLite, SQL Server, MongoDB and CockroachDB.
+# See the documentation for all the connection string options: https://pris.ly/d/connection-strings
+
+# The following `prisma+postgres` URL is similar to the URL produced by running a local Prisma Postgres
+# server with the `prisma dev` CLI command, when not choosing any non-default ports or settings. The API key, unlike the
+# one found in a remote Prisma Postgres URL, does not contain any sensitive information.
+
+DB_USER=tilnede0x1182
+DB_PASSWORD=tilnede0x1182
+DATABASE_URL="postgresql://${DB_USER}:${DB_PASSWORD}@localhost:5432/plant_shop_nextjs"
+
+NEXTAUTH_URL=http://localhost:3100
+NEXTAUTH_SECRET=fshejeurybuierfuicrfuiorfuigrgfbcegfnezxgfoefyugexgfzgfuye
+
+
+## .eslintrc.json
+
+{
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript"
+  ]
+}
+
+
+## Makefile
+
+run:
+# PORT=3100 npm run dev
+	PORT=3100 npm start
+
+seed:
+	npx prisma db seed
+
+prod:
+	npm run build && PORT=3100 npm start
+
+typage:
+	npx tsc --noEmit
+
+lint:
+	npm run lint
+
+typage_lint: lint typage
+
+
+
+# TOUS LES FICHIERS PERTINENTS
+#
+## public/javascripts/application_archive.js
+
+const STORAGE_KEY='cart';
+
+function loadCart(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');}catch{return{};}}
+function saveCart(cart){localStorage.setItem(STORAGE_KEY,JSON.stringify(cart));}
+function createNode(tag,props={},...children){
+	const el=document.createElement(tag);
+	if(props.dataset){for(const[k,v]of Object.entries(props.dataset))el.dataset[k]=v;delete props.dataset;}
+	Object.assign(el,props);
+	children.flat().forEach(c=>el.append(typeof c==='string'?document.createTextNode(c):c));
+	return el;
+}
+function showStockAlert(name,stock){
+	const alert=createNode('div',
+		{className:'alert alert-warning fade position-absolute top-0 start-50 translate-middle-x mt-3 shadow',role:'alert',style:'z-index:1055;max-width:600px;pointerEvents:none'},
+		['Stock insuffisant pour cette plante (',createNode('strong',{textContent:name}),`), actuellement, il en reste ${stock}.`]
+	);
+	document.body.append(alert);
+	setTimeout(()=>alert.classList.add('show'),10);
+	setTimeout(()=>{alert.classList.remove('show');alert.classList.add('fade');setTimeout(()=>alert.remove(),300);},3000);
+}
+function updateNavbarCount(cart){
+	const link=document.getElementById('cart-link');
+	if(link){const n=Object.values(cart).reduce((t,i)=>t+i.quantity,0);link.textContent=`Mon Panier${n?` (${n})`:''}`;}
+}
+
+class Cart{
+	get(){return loadCart();}
+	save(c){saveCart(c);}
+	commit(c){this.save(c);updateNavbarCount(c);}
+
+	add(id,name,price,stock){
+		const c=this.get();
+		c[id]??={id,name,price,quantity:0,stock};
+		if(c[id].quantity>=stock){
+			showStockAlert(name,stock);
+			setTimeout(()=>{c[id].quantity=stock;this.commit(c);},300);
+		}else{c[id].quantity++;this.commit(c);}
+	}
+
+	update(id,value){
+		const qty=parseInt(value,10);
+		if(!qty)return;
+		const c=this.get(); if(!c[id])return;
+		const input=document.querySelector(`input[data-cart-id='${id}']`);
+		const stock=parseInt(input.dataset.stock||'1',10);
+		const newQty=Math.min(Math.max(qty,1),stock);
+		c[id].quantity=input.value=newQty;
+		this.save(c); this.render();
+	}
+
+	remove(id){const c=this.get(); delete c[id]; this.save(c); this.render();}
+	clear(){localStorage.removeItem(STORAGE_KEY); this.render();}
+	delayedUpdate(id,input){clearTimeout(input._t);input._t=setTimeout(()=>this.update(id,input.value),300);}
+
+	renderOrderReview(ctId='order-review-container',inId='order-items-input'){
+		const ct=document.getElementById(ctId),inp=document.getElementById(inId),cart=this.get();
+		if(!ct||!inp)return;
+		if(!Object.keys(cart).length){ct.innerHTML='<p class="alert alert-warning">Votre panier est vide.</p>';inp.value='';return;}
+		const tbody=createNode('tbody'),
+			table=createNode('table',{className:'table shadow'},
+				createNode('thead',{className:'table-light'},
+					createNode('tr',{},...['Plante','Quantité','Total'].map(t=>createNode('th',{textContent:t})))
+				),tbody);
+		let total=0,items=[];
+		for(const[pid,item]of Object.entries(cart)){
+			const sub=item.price*item.quantity; total+=sub;
+			tbody.append(createNode('tr',{},
+				createNode('td',{},createNode('a',{href:`/plants/${pid}`,className:'cart-plant-link',textContent:item.name})),
+				createNode('td',{textContent:item.quantity}),
+				createNode('td',{textContent:`${sub} €`})
+			));
+			items.push({plant_id:+pid,quantity:item.quantity});
+		}
+		ct.innerHTML=''; ct.append(table,createNode('p',{className:'text-end fw-bold',textContent:`Total : ${total} €`}));
+		inp.value=JSON.stringify(items);
+	}
+
+	render(){
+		const ct=document.getElementById('cart-container'); if(!ct)return;
+		const cart=this.get(); ct.innerHTML=''; updateNavbarCount(cart);
+		if(!Object.keys(cart).length){ct.append(createNode('p',{className:'alert alert-info',textContent:'Votre panier est vide.'}));return;}
+
+		const tbody=createNode('tbody'),
+			table=createNode('table',{className:'table'},
+				createNode('thead',{className:'table-light'},
+					createNode('tr',{},...['Plante','Quantité','Action'].map(t=>createNode('th',{textContent:t})))
+				),tbody);
+		let total=0;
+		for(const[pid,item]of Object.entries(cart)){
+			total+=item.price*item.quantity;
+			const input=createNode('input',{type:'number',min:1,className:'form-control form-control-sm',style:'max-width:70px',value:item.quantity});
+			input.dataset.cartId=pid; input.dataset.stock=item.stock;
+			input.oninput=()=>this.delayedUpdate(pid,input);
+			tbody.append(createNode('tr',{},
+				createNode('td',{},createNode('a',{href:`/plants/${pid}`,className:'text-decoration-none',textContent:item.name})),
+				createNode('td',{},input),
+				createNode('td',{},createNode('button',{className:'btn btn-danger btn-sm',textContent:'Retirer',onclick:()=>this.remove(pid)}))
+			));
+		}
+		ct.append(table,
+			createNode('p',{className:'text-end fw-bold',textContent:`Total : ${total} €`}),
+			createNode('div',{className:'d-flex justify-content-between'},
+				createNode('button',{className:'btn btn-outline-secondary btn-sm',textContent:'Vider le panier',onclick:()=>this.clear()}),
+				createNode('a',{href:'/orders/new',className:'btn btn-primary',textContent:'Passer la commande'})
+			)
+		);
+	}
+}
+
+window.cartInstance=new Cart();
+document.addEventListener('DOMContentLoaded',()=>{
+	cartInstance.renderOrderReview();
+	cartInstance.render();
+});
+
+
+## public/stylesheets/application.css
+
+a.cart-plant-link {
+  color: black;
+  text-decoration: none;
+}
+
+a.cart-plant-link:hover {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.cart-plant-link.confirmed {
+  color: black;
+	text-decoration: none;
+}
+
+.cart-plant-link.confirmed:hover {
+  text-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+.custom-navbar {
+  /* background-color: #1966b3; */
+  background-color: #99b715;
+}
+
+
+## prisma/seed.ts
+
+// # Importations
+import { PrismaClient, Prisma, User, Plant } from '@prisma/client'
+import { faker } from '@faker-js/faker'
+import bcrypt from 'bcryptjs'
+import { writeFileSync } from 'node:fs'
+import { join } from 'node:path'
+
+// # Données
+const NB_ADMINS	= 3
+const NB_USERS	= 20
+const NB_PLANTS	= 30
+const MAX_ORDERS_PER_USER = 7
+const PLANT_NAMES = [
+	'Rose','Tulipe','Lavande','Orchidée','Basilic','Menthe','Pivoine','Tournesol',
+	'Cactus (Echinopsis)','Bambou','Camomille (Matricaria recutita)','Sauge (Salvia officinalis)',
+	'Romarin (Rosmarinus officinalis)','Thym (Thymus vulgaris)','Laurier-rose (Nerium oleander)',
+	'Aloe vera','Jasmin (Jasminum officinale)','Hortensia (Hydrangea macrophylla)',
+	'Marguerite (Leucanthemum vulgare)','Géranium (Pelargonium graveolens)','Fuchsia (Fuchsia magellanica)',
+	'Anémone (Anemone coronaria)','Azalée (Rhododendron simsii)','Chrysanthème (Chrysanthemum morifolium)',
+	'Digitale pourpre (Digitalis purpurea)','Glaïeul (Gladiolus hortulanus)','Lys (Lilium candidum)',
+	'Violette (Viola odorata)','Muguet (Convallaria majalis)','Iris (Iris germanica)',
+	'Lavandin (Lavandula intermedia)','Érable du Japon (Acer palmatum)','Citronnelle (Cymbopogon citratus)',
+	'Pin parasol (Pinus pinea)','Cyprès (Cupressus sempervirens)','Olivier (Olea europaea)',
+	'Papyrus (Cyperus papyrus)','Figuier (Ficus carica)','Eucalyptus (Eucalyptus globulus)',
+	'Acacia (Acacia dealbata)','Bégonia (Begonia semperflorens)','Calathea (Calathea ornata)',
+	'Dieffenbachia (Dieffenbachia seguine)','Ficus elastica','Sansevieria (Sansevieria trifasciata)',
+	'Philodendron (Philodendron scandens)','Yucca (Yucca elephantipes)','Zamioculcas zamiifolia',
+	'Monstera deliciosa','Pothos (Epipremnum aureum)','Agave (Agave americana)',
+	'Cactus raquette (Opuntia ficus-indica)','Palmier-dattier (Phoenix dactylifera)',
+	'Amaryllis (Hippeastrum hybridum)','Bleuet (Centaurea cyanus)',
+	'Cœur-de-Marie (Lamprocapnos spectabilis)','Croton (Codiaeum variegatum)',
+	'Dracaena (Dracaena marginata)','Hosta (Hosta plantaginea)','Lierre (Hedera helix)',
+	'Mimosa (Acacia dealbata)'
+]
+
+// # Classe SeedService
+class SeedService {
+	private prisma = new PrismaClient()
+
+	// ## Reset
+	private reset = async (): Promise<void> => {
+		await this.prisma.orderItem.deleteMany()
+		await this.prisma.order.deleteMany()
+		await this.prisma.plant.deleteMany()
+		await this.prisma.user.deleteMany()
+	}
+
+	// ## Admins
+	private createAdmins = async () => {
+		const admins: { email: string; password: string }[] = []
+		for (let idx = 0; idx < NB_ADMINS; idx++) admins.push(await this.addAdmin(idx))
+		return admins
+	}
+
+	private addAdmin = async (index: number) => {
+		const email = `admin${index + 1}@planteshop.com`
+		const password = 'password'
+		await this.prisma.user.create({
+			data: { email, password: await bcrypt.hash(password, 10), admin: true, name: faker.person.fullName() }
+		})
+		return { email, password }
+	}
+
+	// ## Users
+	private createUsers = async () => {
+		const users: { email: string; password: string }[] = []
+		for (let idx = 0; idx < NB_USERS; idx++) users.push(await this.addUser())
+		return users
+	}
+
+	private addUser = async () => {
+		const password = faker.internet.password({ length: 12 })
+		const email = faker.internet.email().toLowerCase()
+		await this.prisma.user.create({
+			data: { email, password: await bcrypt.hash(password, 10), admin: false, name: faker.person.fullName() }
+		})
+		return { email, password }
+	}
+
+	// ## Plants
+	private createPlants = async () => {
+		const max = PLANT_NAMES.length
+		const plants: Plant[] = []
+		for (let idx = 0; idx < NB_PLANTS; idx++) plants.push(await this.addPlant(idx, max))
+		return plants
+	}
+
+	private addPlant = async (idx: number, max: number) => {
+		const base = PLANT_NAMES[idx % max]
+		const name = NB_PLANTS > max ? `${base} ${Math.floor(idx / max) + 1}` : base
+		return this.prisma.plant.create({
+			data: {
+				name,
+				price: faker.number.int({ min: 5, max: 50 }),
+				description: faker.lorem.sentence({ min: 10, max: 14 }),
+				stock: faker.number.int({ min: 5, max: 30 })
+			}
+		})
+	}
+
+	// ## Orders
+	private createOrders = async (plants: Plant[]) => {
+		for (const user of await this.prisma.user.findMany()) {
+			const numberOfOrders = faker.number.int({ min: 0, max: MAX_ORDERS_PER_USER })
+			for (let idx = 0; idx < numberOfOrders; idx++) {
+				await this.createOrderForUser(user, plants)
+			}
+		}
+	}
+
+	private createOrderForUser = async (user: User, plants: Plant[]) => {
+		let total = 0
+		const order = await this.prisma.order.create({
+			data: { userId: user.id, totalPrice: 0, status: faker.helpers.arrayElement(['confirmed','pending','shipped','delivered']) }
+		})
+		for (let iter = 0; iter < 2; iter++) total += await this.addItem(order.id, plants)
+		await this.prisma.order.update({ where: { id: order.id }, data: { totalPrice: total } })
+	}
+
+	private addItem = async (orderId: number, plants: Plant[]) => {
+		const plant = plants[Math.floor(Math.random() * plants.length)]
+		if (!plant.stock) return 0
+		const qty = Math.min(faker.number.int({ min: 1, max: 5 }), plant.stock)
+		if (!qty) return 0
+		await this.prisma.orderItem.create({ data: { orderId, plantId: plant.id, quantity: qty } })
+		await this.prisma.plant.update({ where: { id: plant.id }, data: { stock: plant.stock - qty } })
+		plant.stock -= qty
+		return plant.price * qty
+	}
+
+	// ## users.txt
+	private writeUsersFile = (admins: {email:string;password:string}[], users: {email:string;password:string}[]) => {
+		const path = join(process.cwd(), 'users.txt')
+		let txt = 'Administrateurs :\n\n'
+		admins.forEach(admin => (txt += `${admin.email} ${admin.password}\n`))
+		txt += '\nUtilisateurs :\n\n'
+		users.forEach(u => (txt += `${u.email} ${u.password}\n`))
+		writeFileSync(path, txt, 'utf8')
+	}
+
+	// # Main
+	public run = async (): Promise<void> => {
+		await this.reset()
+		const admins = await this.createAdmins()
+		const users = await this.createUsers()
+		const plants = await this.createPlants()
+		this.writeUsersFile(admins, users)
+		await this.createOrders(plants)
+		console.log('✅ Seed terminée. Données créées & users.txt généré.')
+		await this.prisma.$disconnect()
+	}
+}
+
+// # Lancement
+new SeedService().run().catch(err => {
+	console.error(err)
+	process.exit(1)
+})
+
+
+## next.config.ts
+
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+};
+
+export default nextConfig;
+
+
+## next-env.d.ts
+
+/// <reference types="next" />
+/// <reference types="next/image-types/global" />
+
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/app/api-reference/config/typescript for more information.
+
+
+## src/utils/deleteAndCheck.ts
+
+/**
+  Supprime une ressource et vérifie en base via GET juste après.
+  @param deleteUrl URL DELETE (API)
+  @param checkUrl URL GET de vérification après suppression
+  @param successCallback à exécuter sur vrai succès (ex : refresh UI)
+*/
+export async function deleteAndCheck(deleteUrl: string, checkUrl: string, successCallback: () => void) {
+	const res = await fetch(deleteUrl, { method: "DELETE" })
+	if (res.ok) {
+		const check = await fetch(checkUrl)
+		if (check.status === 404) {
+			// console.log(`Suppression réussie : ${deleteUrl}`)
+			successCallback()
+		} else {
+			// console.log(`Erreur : ressource ${deleteUrl} existe encore en base.`)
+		}
+	} else {
+		// const data = await res.json().catch(() => ({}))
+		// console.log("Erreur suppression :", data.error || "erreur inconnue")
+	}
+}
+
+
+## src/utils/deleteWithLog.ts
+
+/**
+  Supprime un enregistrement avec gestion log, pour réutilisation dans les handlers.
+  @prisma le client Prisma à utiliser
+  @type "plant" | "user"
+  @id identifiant numérique à supprimer
+*/
+import { PrismaClient } from "@prisma/client";
+
+export async function deleteWithLog(
+	prisma: Pick<PrismaClient, "plant" | "user">,
+	type: "plant" | "user",
+	id: number
+) {
+	try {
+		if (type === "plant") {
+			await prisma.plant.delete({ where: { id } });
+			// console.log(`Suppression réussie plante id=${id}`)
+		} else if (type === "user") {
+			await prisma.user.delete({ where: { id } });
+			// console.log(`Suppression réussie utilisateur id=${id}`)
+		} else {
+			// throw new Error("Type de suppression non supporté")
+		}
+		return { ok: true };
+	} catch (error) {
+		console.error(`Erreur suppression ${type} id=${id}:`, error);
+		return { ok: false, error };
+	}
+}
+
+
+## src/middleware.ts
+
+import { getToken } from "next-auth/jwt"
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
+
+const secret = process.env.NEXTAUTH_SECRET
+
+export async function middleware(req: NextRequest) {
+  const token = await getToken({ req, secret })
+  const url = req.nextUrl.clone()
+
+  if (!token && req.nextUrl.pathname.startsWith("/admin")) {
+    return NextResponse.redirect(new URL('/auth/signin', req.url))
+  }
+
+  if (token && !token.admin && url.pathname.startsWith("/admin")) {
+    url.pathname = "/unauthorized"
+    return NextResponse.redirect(url)
+  }
+
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: ["/admin/:path*"]
+}
+
+
+## src/app/cart/page.tsx
+
+"use client";
+import CartProvider from "../components/CartProvider";
+
+export default function CartPage() {
+  return (
+    <div className="container mt-4">
+      <h1 className="text-center mb-4">🛒 Mon Panier</h1>
+      <CartProvider />
+      <div id="cart-container" />
+    </div>
+  );
+}
+
+
+## src/app/components/CartProvider.tsx
+
+"use client";
+
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+
+type CartItem = {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  stock: number;
+};
+type CartObject = Record<string, CartItem>;
+
+declare global {
+  interface Window {
+    cartInstance?: Cart;
+  }
+}
+
+const STORAGE_KEY = "cart";
+
+function loadCart(): CartObject {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") as CartObject;
+  } catch {
+    return {};
+  }
+}
+
+function saveCart(cart: CartObject): void {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+  window.dispatchEvent(new Event("cart-updated"));
+}
+
+type NodeProps = Partial<{
+	className: string;
+	role: string;
+	style: string;
+	href: string;
+	textContent: string;
+	type: string;
+	min: number;
+	value: string | number;
+	onclick: () => void;
+	oninput: () => void;
+	dataset: Record<string, string | number>;
+}>;
+
+function createNode<Tag extends keyof HTMLElementTagNameMap>(
+  tag: Tag,
+  props: NodeProps = {},
+  ...children: (string | Node)[]
+): HTMLElementTagNameMap[Tag] {
+  const el = document.createElement(tag);
+  // gestion dataset si fourni
+  if (props.dataset && typeof props.dataset === "object") {
+    for (const [k, v] of Object.entries(props.dataset)) {
+      el.dataset[k] = String(v);
+    }
+    delete props.dataset;
+  }
+  Object.entries(props)
+    .filter(([key]) => key !== "dataset")
+    .forEach(([key, value]) => {
+      // attributs simples (href, style en string, className, etc.)
+      // on peut assigner directement sur l'élément si la propriété existe,
+      // sinon on la passe en attribut HTML
+      if (key in el) {
+        // @ts-expect-error: dynamic property assignment (controlled)
+        el[key] = value;
+      } else {
+        el.setAttribute(key, String(value));
+      }
+    });
+  children.flat().forEach((c) =>
+    el.append(typeof c === "string" ? document.createTextNode(c) : c)
+  );
+  return el as HTMLElementTagNameMap[Tag];
+}
+
+function showStockAlert(name: string, stock: number): void {
+  const alert = createNode(
+    "div",
+    {
+      className:
+        "alert alert-warning fade position-absolute top-0 start-50 translate-middle-x mt-3 shadow",
+      role: "alert",
+      style: "z-index:1055;max-width:600px;pointer-events:none;",
+    },
+    document.createTextNode("Stock insuffisant pour cette plante ("),
+    createNode("strong", { textContent: name }),
+    document.createTextNode(`), actuellement, il en reste ${stock}.`)
+  );
+  document.body.append(alert);
+  setTimeout(() => alert.classList.add("show"), 10);
+  setTimeout(() => {
+    alert.classList.remove("show");
+    alert.classList.add("fade");
+    setTimeout(() => alert.remove(), 300);
+  }, 3000);
+}
+
+function updateNavbarCount(cart: CartObject): void {
+  const link = document.getElementById("cart-link");
+  if (link) {
+    const n = Object.values(cart).reduce(
+      (t, i) => t + i.quantity,
+      0
+    );
+    link.textContent = `Mon Panier${n ? ` (${n})` : ""}`;
+  }
+}
+
+class Cart {
+  get(): CartObject {
+    return loadCart();
+  }
+  save(c: CartObject): void {
+    saveCart(c);
+  }
+  commit(c: CartObject): void {
+    this.save(c);
+    window.dispatchEvent(new Event("storage"));
+  }
+
+  add(id: number, name: string, price: number, stock: number): void {
+    const c = this.get();
+    c[id] ??= { id, name, price, quantity: 0, stock };
+    if (c[id].quantity >= stock) {
+      showStockAlert(name, stock);
+      setTimeout(() => {
+        c[id].quantity = stock;
+        this.commit(c);
+      }, 300);
+    } else {
+      c[id].quantity++;
+      this.commit(c);
+    }
+  }
+
+  update(id: number, value: string): void {
+    const qty = parseInt(value, 10);
+    if (Number.isNaN(qty)) return;
+    const c = this.get();
+    if (!c[id]) return;
+    const input = document.querySelector(
+      `input[data-cart-id='${id}']`
+    ) as HTMLInputElement | null;
+    if (!input) return;
+    const stock = parseInt(input.dataset.stock || "1", 10);
+    const corrected = Math.min(Math.max(qty, 1), stock);
+    c[id].quantity = corrected;
+    input.value = String(corrected);
+    this.commit(c);
+    this.render();
+  }
+
+  remove(id: number): void {
+    const c = this.get();
+    delete c[id];
+    this.save(c);
+    window.dispatchEvent(new Event("storage"));
+    this.render();
+  }
+
+  clear(): void {
+    localStorage.removeItem(STORAGE_KEY);
+    window.dispatchEvent(new Event("storage"));
+    this.render();
+  }
+
+  delayedUpdate(id: number, input: HTMLInputElement): void {
+    (input as HTMLInputElement & { _t?: number })._t = window.setTimeout(
+      () => this.update(id, input.value),
+      300
+    );
+  }
+
+  renderOrderReview(
+    ctId = "order-review-container",
+    inId = "order-items-input"
+  ): void {
+    const ct = document.getElementById(ctId);
+    const inp = document.getElementById(inId) as HTMLInputElement | null;
+    const cart = this.get();
+    if (!ct || !inp) return;
+    if (Object.keys(cart).length === 0) {
+      ct.innerHTML = '<p class="alert alert-warning">Votre panier est vide.</p>';
+      inp.value = "";
+      return;
+    }
+    const tbody = createNode("tbody");
+    const table = createNode(
+      "table",
+      { className: "table shadow" },
+      createNode(
+        "thead",
+        { className: "table-light" },
+        createNode(
+          "tr",
+          {},
+          ...["Plante", "Quantité", "Total"].map((t) =>
+            createNode("th", { textContent: t })
+          )
+        )
+      ),
+      tbody
+    );
+    const items: { plant_id: number; quantity: number }[] = [];
+    let total = 0;
+    for (const [pid, item] of Object.entries(cart)) {
+      const sub = item.price * item.quantity;
+      total += sub;
+      tbody.append(
+        createNode(
+          "tr",
+          {},
+          createNode("td", {}, createNode("a", {
+            href: `/plants/${pid}`,
+            className: "cart-plant-link",
+            textContent: item.name,
+          })),
+          createNode("td", { textContent: String(item.quantity) }),
+          createNode("td", { textContent: `${sub} €` })
+        )
+      );
+      items.push({ plant_id: +pid, quantity: item.quantity });
+    }
+    ct.innerHTML = "";
+    ct.append(
+      table,
+      createNode("p", {
+        className: "text-end fw-bold",
+        textContent: `Total : ${total} €`,
+      })
+    );
+    inp.value = JSON.stringify(items);
+  }
+
+  render(): void {
+    const ct = document.getElementById("cart-container");
+    if (!ct) return;
+    const cart = this.get();
+    ct.innerHTML = "";
+    updateNavbarCount(cart);
+    if (Object.keys(cart).length === 0) {
+      ct.append(
+        createNode("p", {
+          className: "alert alert-info",
+          textContent: "Votre panier est vide.",
+        })
+      );
+      return;
+    }
+
+    const tbody = createNode("tbody");
+    const table = createNode(
+      "table",
+      { className: "table" },
+      createNode(
+        "thead",
+        { className: "table-light" },
+        createNode(
+          "tr",
+          {},
+          ...["Plante", "Quantité", "Action"].map((t) =>
+            createNode("th", { textContent: t })
+          )
+        )
+      ),
+      tbody
+    );
+    let total = 0;
+    for (const [pid, item] of Object.entries(cart)) {
+      total += item.price * item.quantity;
+      const input = createNode("input", {
+        type: "number",
+        min: 1,
+        className: "form-control form-control-sm",
+        style: "max-width:70px",
+        value: String(item.quantity),
+      }) as HTMLInputElement;
+      input.dataset.cartId = pid;
+      input.dataset.stock = String(item.stock);
+      input.oninput = () => this.delayedUpdate(+pid, input);
+      tbody.append(
+        createNode(
+          "tr",
+          {},
+          createNode("td", {}, createNode("a", {
+            href: `/plants/${pid}`,
+            className: "text-decoration-none",
+            textContent: item.name,
+          })),
+          createNode("td", {}, input),
+          createNode("td", {}, createNode("button", {
+            className: "btn btn-danger btn-sm",
+            textContent: "Retirer",
+            onclick: () => this.remove(+pid),
+          }))
+        )
+      );
+    }
+    ct.append(
+      table,
+      createNode("p", {
+        className: "text-end fw-bold",
+        textContent: `Total : ${total} €`,
+      }),
+      createNode(
+        "div",
+        { className: "d-flex justify-content-between" },
+        createNode("button", {
+          className: "btn btn-outline-secondary btn-sm",
+          textContent: "Vider le panier",
+          onclick: () => this.clear(),
+        }),
+        createNode("a", {
+          href: "/orders/new",
+          className: "btn btn-primary",
+          textContent: "Passer la commande",
+        })
+      )
+    );
+  }
+}
+
+export default function CartProvider() {
+  const pathname = usePathname();
+  useEffect(() => {
+    if (!window.cartInstance) {
+      window.cartInstance = new Cart();
+    }
+    window.cartInstance.renderOrderReview();
+    window.cartInstance.render();
+  }, [pathname]);
+  return null;
+}
+
+
+## src/app/components/Navbar.tsx
+
+"use client";
+import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+
+// Navbar avec gestion utilisateur et rôle admin
+export default function Navbar() {
+	const { data: session } = useSession();
+	const user = session?.user;
+	const [nombreArticles, setNombreArticles] = useState<number | null>(null);
+
+	const isAdmin = user?.admin === true;
+
+	const capitalizeName = (name?: string) =>
+		name
+			? name
+					.split(" ")
+					.map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+					.join(" ")
+			: "";
+
+	useEffect(() => {
+		if (typeof window === "undefined") return;
+
+		function updateCount() {
+			try {
+				const panier = JSON.parse(localStorage.getItem("cart") || "{}");
+				let total = 0;
+				for (const key in panier) total += panier[key].quantity;
+				// console.log("Navbar: updateCount appelé, total =", total);
+				setNombreArticles(total);
+			} catch {
+				setNombreArticles(0);
+			}
+		}
+
+		updateCount();
+		window.addEventListener("storage", updateCount);
+		window.addEventListener("cart-updated", updateCount);
+		return () => {
+			window.removeEventListener("storage", updateCount);
+			window.removeEventListener("cart-updated", updateCount);
+		};
+	}, [usePathname()]);
+
+	// console.log("Navbar: render, nombreArticles =", nombreArticles);
+
+	return (
+		<nav className="navbar navbar-expand-lg navbar-dark custom-navbar">
+			<div className="container">
+				<Link href="/" className="navbar-brand">
+					🌿 PlantShop
+				</Link>
+				<button
+					className="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+				>
+					<span className="navbar-toggler-icon"></span>
+				</button>
+
+				<div className="collapse navbar-collapse" id="navbarNav">
+					<ul className="navbar-nav ms-auto">
+						{user && user.name && (
+							<li className="nav-item d-flex align-items-center text-white me-3">
+								{capitalizeName(user.name)}
+								{isAdmin && " (Administrateur)"}
+							</li>
+						)}
+						<li className="nav-item">
+							<Link
+								href="/cart"
+								className="nav-link"
+								id="cart-link"
+							>
+								{`Mon Panier${typeof nombreArticles === "number" && nombreArticles > 0 ? ` (${nombreArticles})` : ""}`}
+							</Link>
+						</li>
+						{user ? (
+							<>
+								<li className="nav-item">
+									<Link href="/orders" className="nav-link">
+										Mes Commandes
+									</Link>
+								</li>
+								<li className="nav-item">
+									<Link
+										href={`/users/${user.id}`}
+										className="nav-link"
+									>
+										Mon Profil
+									</Link>
+								</li>
+								{isAdmin && (
+									<li className="nav-item dropdown">
+										<a
+											className="nav-link dropdown-toggle"
+											href="#"
+											role="button"
+											data-bs-toggle="dropdown"
+										>
+											Admin
+										</a>
+										<ul className="dropdown-menu">
+											<li>
+												<Link
+													href="/admin/plants"
+													className="dropdown-item"
+												>
+													Gestion des Plantes
+												</Link>
+											</li>
+											<li>
+												<Link
+													href="/admin/users"
+													className="dropdown-item"
+												>
+													Gestion des Utilisateurs
+												</Link>
+											</li>
+										</ul>
+									</li>
+								)}
+								<button
+									onClick={() => signOut()}
+									className="nav-link bg-transparent border-0 p-0"
+									type="button"
+								>
+									Déconnexion
+								</button>
+							</>
+						) : (
+							<>
+								<li className="nav-item">
+									<Link
+										href="/auth/register"
+										className="nav-link"
+									>
+										S&apos;inscrire
+									</Link>
+								</li>
+								<li className="nav-item">
+									<Link
+										href="/auth/signin"
+										className="nav-link"
+									>
+										Se connecter
+									</Link>
+								</li>
+							</>
+						)}
+					</ul>
+				</div>
+			</div>
+		</nav>
+	);
+}
+
+
+## src/app/components/FlashMessages.tsx
+
+"use client";
+import { useEffect, useState } from "react";
+// import { useRouter } from "next/navigation";
+
+export default function FlashMessages() {
+	const [notice, setNotice] = useState<string | null>(null);
+	const [alert, setAlert] = useState<string | null>(null);
+	// const router = useRouter();
+
+	useEffect(() => {
+		// Exemple : lire messages depuis sessionStorage ou autre source
+		const n = sessionStorage.getItem("notice");
+		const a = sessionStorage.getItem("alert");
+		if (n) {
+			setNotice(n);
+			sessionStorage.removeItem("notice");
+		}
+		if (a) {
+			setAlert(a);
+			sessionStorage.removeItem("alert");
+		}
+
+		// Effacer messages à chaque navigation
+		if (typeof window !== "undefined") {
+			const resetMessages = () => {
+				setNotice(null);
+				setAlert(null);
+			};
+			window.addEventListener("beforeunload", resetMessages);
+			return () =>
+				window.removeEventListener("beforeunload", resetMessages);
+		}
+	}, []);
+
+	if (!notice && !alert) return null;
+
+	return (
+		<>
+			{notice && <div className="alert alert-success">{notice}</div>}
+			{alert && <div className="alert alert-danger">{alert}</div>}
+		</>
+	);
+}
+
+
+## src/app/admin/plants/new/page.tsx
+
+"use client"
+import PlantForm from "../PlantForm"
+
+export default function AdminPlantNewPage() {
+	return (
+		<div className="container mt-4">
+			<h1>Nouvelle Plante (Admin)</h1>
+			<PlantForm />
+		</div>
+	)
+}
+
+
+## src/app/admin/plants/page.tsx
+
+"use client"
+import Link from "next/link"
+import { useEffect, useState } from "react"
+import { deleteAndCheck } from "@/utils/deleteAndCheck"
+
+type Plant = {
+	id: number
+	name: string
+	price: number
+	stock: number
+}
+
+export default function AdminPlantsPage() {
+	const [plants, setPlants] = useState<Plant[]>([])
+
+	useEffect(() => {
+		fetch("/api/admin/plants")
+			.then(res => res.json())
+			.then(data => setPlants(data))
+	}, [])
+
+	return (
+		<div className="container mt-4">
+			<h1 className="mb-4">Gestion des Plantes</h1>
+			<div className="mb-3">
+				<Link href="/admin/plants/new" className="btn btn-outline-success">
+					Nouvelle Plante
+				</Link>
+			</div>
+			<table className="table table-striped table-hover">
+				<thead className="table-light">
+					<tr>
+						<th>Nom</th>
+						<th>Prix</th>
+						<th>Stock</th>
+						<th className="text-center">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{plants.map(plant => (
+						<tr key={plant.id}>
+							<td>
+								<Link href={`/plants/${plant.id}`} className="text-decoration-none text-dark">
+									{plant.name}
+								</Link>
+							</td>
+							<td>{plant.price} €</td>
+							<td>{plant.stock}</td>
+							<td className="text-center">
+								<div className="d-flex justify-content-center gap-2">
+									<Link
+										href={`/admin/plants/${plant.id}/edit`}
+										className="btn btn-warning btn-sm"
+									>
+										✏ Modifier
+									</Link>
+									<button
+										className="btn btn-danger btn-sm"
+										onClick={async () => {
+											if (!confirm("Supprimer cette plante ?")) return
+											await deleteAndCheck(
+												`/api/admin/plants/${plant.id}`,
+												`/api/plants/${plant.id}`,
+												() => setPlants(plants.filter(p => p.id !== plant.id))
+											)
+										}}
+									>
+										🗑 Supprimer
+									</button>
+								</div>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	)
+}
+
+
+## src/app/admin/plants/[id]/edit/page.tsx
+
+"use client"
+import PlantForm from "../../PlantForm"
+import { useParams } from "next/navigation"
+
+export default function AdminPlantEditPage() {
+	const params = useParams()
+	return (
+		<div className="container mt-4">
+			<h1>Éditer la Plante</h1>
+			<PlantForm plantId={Array.isArray(params?.id) ? params.id[0] : params?.id} />
+		</div>
+	)
+}
+
+
+## src/app/admin/plants/PlantForm.tsx
+
+"use client"
+import { useEffect, useState, FormEvent } from "react"
+import { useRouter } from "next/navigation"
+
+type Plant = {
+	id?: number
+	name: string
+	price: number
+	description: string
+	stock: number
+}
+
+type Props = {
+	plantId?: string
+}
+
+export default function PlantForm({ plantId }: Props) {
+	const router = useRouter()
+	const [form, setForm] = useState<Plant>({
+		name: "",
+		price: 0,
+		description: "",
+		stock: 0
+	})
+	const [errors, setErrors] = useState<string[]>([])
+	const [loading, setLoading] = useState(false)
+
+	useEffect(() => {
+		if (!plantId) return
+		fetch(`/api/plants/${plantId}`)
+			.then(res => res.json())
+			.then(data => {
+				setForm({
+					name: data.name || "",
+					price: data.price || 0,
+					description: data.description || "",
+					stock: data.stock || 0
+				})
+			})
+	}, [plantId])
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = e.target
+		setForm(prev => ({
+			...prev,
+			[name]: name === "price" || name === "stock" ? Number(value) : value
+		}))
+	}
+
+	const handleSubmit = async (e: FormEvent) => {
+		e.preventDefault()
+		setLoading(true)
+		setErrors([])
+
+		const method = plantId ? "PUT" : "POST"
+		const url = plantId ? `/api/plants/${plantId}` : "/api/plants"
+
+		const res = await fetch(url, {
+			method,
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(form)
+		})
+
+		setLoading(false)
+
+		if (res.ok) {
+			router.push("/admin/plants")
+		} else {
+			const data = await res.json()
+			setErrors(data.errors || ["Erreur lors de la sauvegarde."])
+		}
+	}
+
+	return (
+		<form onSubmit={handleSubmit}>
+			{errors.length > 0 && (
+				<div className="alert alert-danger">
+					<ul>
+						{errors.map((err, idx) => (
+							<li key={idx}>{err}</li>
+						))}
+					</ul>
+				</div>
+			)}
+
+			<div className="mb-3">
+				<label htmlFor="name" className="form-label">
+					Nom de la plante
+				</label>
+				<input
+					type="text"
+					id="name"
+					name="name"
+					className="form-control"
+					value={form.name}
+					onChange={handleChange}
+					required
+				/>
+			</div>
+			<div className="mb-3">
+				<label htmlFor="price" className="form-label">
+					Prix (€)
+				</label>
+				<input
+					type="number"
+					id="price"
+					name="price"
+					className="form-control"
+					value={form.price}
+					onChange={handleChange}
+					required
+				/>
+			</div>
+			<div className="mb-3">
+				<label htmlFor="description" className="form-label">
+					Description
+				</label>
+				<textarea
+					id="description"
+					name="description"
+					rows={4}
+					className="form-control"
+					value={form.description}
+					onChange={handleChange}
+				/>
+			</div>
+			<div className="mb-3">
+				<label htmlFor="stock" className="form-label">
+					Stock (unités)
+				</label>
+				<input
+					type="number"
+					id="stock"
+					name="stock"
+					className="form-control"
+					value={form.stock}
+					onChange={handleChange}
+					required
+				/>
+			</div>
+			<button type="submit" disabled={loading} className="btn btn-primary">
+				{plantId ? "Mettre à jour" : "Créer"}
+			</button>
+		</form>
+	)
+}
+
+
+## src/app/admin/users/page.tsx
+
+"use client"
+import Link from "next/link"
+import { useEffect, useState } from "react"
+import { deleteAndCheck } from "@/utils/deleteAndCheck"
+
+type User = {
+	id: number
+	name: string
+	email: string
+	admin: boolean
+}
+
+export default function AdminUsersPage() {
+	const [users, setUsers] = useState<User[]>([])
+
+	useEffect(() => {
+		fetch("/api/users")
+			.then(res => res.json())
+			.then(data => setUsers(data))
+	}, [])
+
+	return (
+		<div className="container mt-4">
+			<h1 className="mb-4">Gestion des Utilisateurs</h1>
+			<table className="table table-striped table-hover">
+				<thead className="table-light">
+					<tr>
+						<th>Nom</th>
+						<th>Email</th>
+						<th>Administrateur</th>
+						<th className="text-center">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{users.map(user => (
+						<tr key={user.id}>
+							<td>
+								<Link
+									href={`/admin/users/${user.id}`}
+									className="text-decoration-none text-dark"
+								>
+									{user.name}
+								</Link>
+							</td>
+							<td>{user.email}</td>
+							<td>
+								<span className={`badge ${user.admin ? "bg-success" : "bg-secondary"}`}>
+									{user.admin ? "Oui" : "Non"}
+								</span>
+							</td>
+							<td className="text-center">
+								<div className="d-flex justify-content-center gap-2">
+									<Link
+										href={`/admin/users/${user.id}/edit`}
+										className="btn btn-warning btn-sm"
+									>
+										✏ Modifier
+									</Link>
+									<button
+										className="btn btn-danger btn-sm"
+										onClick={async () => {
+											if (!confirm("Supprimer cet utilisateur ?")) return
+											await deleteAndCheck(
+												`/api/admin/users/${user.id}`,
+												`/api/users/${user.id}`,
+												() => setUsers(users.filter(u => u.id !== user.id))
+											)
+										}}
+									>
+										🗑 Supprimer
+									</button>
+								</div>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		</div>
+	)
+}
+
+
+## src/app/admin/users/[id]/edit/page.tsx
+
+"use client";
+import { useEffect, useState, FormEvent } from "react";
+import { useParams, useRouter } from "next/navigation";
+
+type UserForm = {
+	email: string;
+	name: string;
+	admin: boolean;
+};
+
+type Errors = string[];
+
+export default function AdminUserEditPage() {
+	const params = useParams();
+	const router = useRouter();
+	const [form, setForm] = useState<UserForm>({
+		email: "",
+		name: "",
+		admin: false,
+	});
+	const [errors, setErrors] = useState<Errors>([]);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		if (!params?.id) return;
+		fetch(`/api/users/${params.id}`)
+			.then((res) => res.json())
+			.then((data) => {
+				setForm({
+					email: data.email || "",
+					name: data.name || "",
+					admin: data.admin || false,
+				});
+				setLoading(false);
+			});
+	}, [params?.id]);
+
+	const handleChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
+		const target = e.target as HTMLInputElement;
+		const { name, value, type, checked } = target;
+		setForm((prev) => ({
+			...prev,
+			[name]: type === "checkbox" ? checked : value,
+		}));
+	};
+
+	const handleSubmit = async (e: FormEvent) => {
+		e.preventDefault();
+		if (!params?.id) return;
+		const res = await fetch(`/api/users/${params.id}`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(form),
+		});
+		if (res.ok) {
+			router.push("/admin/users");
+		} else {
+			const data = await res.json();
+			setErrors(data.errors || ["Erreur lors de la mise à jour."]);
+		}
+	};
+
+	if (loading) return <p>Chargement...</p>;
+
+	return (
+		<div className="container mt-4">
+			<h1>Modifier l&apos;utilisateur</h1>
+
+			{errors.length > 0 && (
+				<div className="alert alert-danger">
+					<ul>
+						{errors.map((error, idx) => (
+							<li key={idx}>{error}</li>
+						))}
+					</ul>
+				</div>
+			)}
+
+			<form onSubmit={handleSubmit}>
+				<div className="mb-3">
+					<label htmlFor="email" className="form-label">
+						Email
+					</label>
+					<input
+						id="email"
+						name="email"
+						type="email"
+						className="form-control"
+						value={form.email}
+						onChange={handleChange}
+						required
+					/>
+				</div>
+
+				<div className="mb-3">
+					<label htmlFor="name" className="form-label">
+						Nom
+					</label>
+					<input
+						id="name"
+						name="name"
+						type="text"
+						className="form-control"
+						value={form.name}
+						onChange={handleChange}
+					/>
+				</div>
+
+				<div className="mb-3 form-check">
+					<input
+						id="admin"
+						name="admin"
+						type="checkbox"
+						className="form-check-input"
+						checked={form.admin}
+						onChange={handleChange}
+					/>
+					<label htmlFor="admin" className="form-check-label">
+						Administrateur
+					</label>
+				</div>
+
+				<button type="submit" className="btn btn-primary">
+					Enregistrer
+				</button>
+			</form>
+		</div>
+	);
+}
+
+
+## src/app/admin/users/[id]/page.tsx
+
+"use client"
+import Link from "next/link"
+import { useParams, useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+
+type User = {
+	id: number
+	email: string
+	name?: string | null
+}
+
+export default function AdminUserShowPage() {
+	const params = useParams()
+	const router = useRouter()
+	const [user, setUser] = useState<User | null>(null)
+
+	useEffect(() => {
+		if (!params?.id) return
+		fetch(`/api/users/${params.id}`)
+			.then(res => res.json())
+			.then(data => setUser(data))
+	}, [params?.id])
+
+	if (!user) return <p>Chargement...</p>
+
+	const handleDelete = async () => {
+		if (!confirm("Supprimer cet utilisateur ?")) return
+		await fetch(`/api/admin/users/${user.id}`, { method: "DELETE" })
+		router.push("/admin/users")
+	}
+
+	return (
+		<div className="container mt-4">
+			{user.name && <h1><strong>Nom :</strong> {user.name}</h1>}
+			<p><strong>Email :</strong> {user.email}</p>
+			<Link href={`/admin/users/${user.id}/edit`} className="btn btn-warning">
+				Modifier
+			</Link>
+			<button
+				className="btn btn-danger btn-sm ms-2"
+				onClick={handleDelete}
+			>
+				🗑 Supprimer
+			</button>
+		</div>
+	)
+}
+
+
+## src/app/api/admin/plants/route.ts
+
+import { NextResponse } from "next/server"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
+
+export async function GET() {
+	const plants = await prisma.plant.findMany({
+		orderBy: { name: "asc" }
+	})
+	return NextResponse.json(plants)
+}
+
+
+## src/app/api/admin/plants/[id]/route.ts
+
+import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+import { deleteWithLog } from "../../../../../utils/deleteWithLog";
+
+const prisma = new PrismaClient();
+
+// Supprime une plante en base et renvoie un JSON adapté
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const id = Number(params.id);
+  const result = await deleteWithLog(prisma, "plant", id);
+
+  if (result.ok) {
+    return NextResponse.json({ message: "Plant deleted" });
+  }
+
+  return NextResponse.json(
+    { error: "Erreur suppression plante" },
+    { status: 500 }
+  );
+}
+
+
+## src/app/api/admin/users/[id]/route.ts
+
+import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+import { deleteWithLog } from "../../../../../utils/deleteWithLog";
+
+const prisma = new PrismaClient();
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
+  const id = Number(params.id);
+  const result = await deleteWithLog(prisma, "user", id);
+
+  if (result.ok) {
+    return NextResponse.json({ message: "User deleted" });
+  }
+
+  return NextResponse.json(
+    { error: "Erreur suppression user" },
+    { status: 500 }
+  );
+}
+
+
+## src/app/api/plants/route.ts
+
+import { NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
+export async function GET() {
+	const plants = await prisma.plant.findMany({
+		where: { stock: { gte: 1 } },
+		orderBy: { name: "asc" },
+	});
+	return NextResponse.json(plants);
+}
+
+export async function POST(request: Request) {
+	const data = await request.json();
+	const plant = await prisma.plant.create({ data });
+	return NextResponse.json(plant);
+}
+
+
+## src/app/api/plants/[id]/route.ts
+
+import { NextResponse } from "next/server"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
+
+export async function GET(request: Request, { params }: { params: { id: string } }) {
+  const { id: paramId } = await params
+  const id = Number(paramId)
+  const plant = await prisma.plant.findUnique({ where: { id } })
+  if (!plant) return NextResponse.json({ error: "Plant not found" }, { status: 404 })
+  return NextResponse.json(plant)
+}
+
+export async function PUT(request: Request, { params }: { params: { id: string } }) {
+  const id = Number((await params).id)
+  const data = await request.json()
+  const plant = await prisma.plant.update({ where: { id }, data })
+  return NextResponse.json(plant)
+}
+
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+  const id = Number((await params).id)
+  await prisma.plant.delete({ where: { id } })
+  return NextResponse.json({ message: "Plant deleted" })
+}
+
+
+## src/app/api/orders/route.ts
+
+import { NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../auth/[...nextauth]/route";
+
+const prisma = new PrismaClient();
+
+export async function GET() {
+	const session = await getServerSession(authOptions);
+	if (!session?.user?.id) {
+		return NextResponse.json([], { status: 401 });
+	}
+	const userId = Number((session.user as { id: string }).id
+);
+	const orders = await prisma.order.findMany({
+		where: { userId },
+		include: { orderItems: { include: { plant: true } } },
+	});
+	return NextResponse.json(orders);
+}
+
+export async function POST(request: Request) {
+	const { items, userId } = await request.json()
+	if (!Array.isArray(items) || typeof userId !== "number") {
+		return NextResponse.json({ error: "Payload invalide" }, { status: 400 })
+	}
+	let total = 0
+	// console.log('userId utilisé pour la commande =', userId);
+	// const allUsers = await prisma.user.findMany();
+	// console.log("Tous les users présents (id) :", allUsers.map(u => u.id));
+	const order = await prisma.order.create({
+		data: { userId, status: "confirmed", totalPrice: 0 }
+	})
+	for (const item of items) {
+		const plant = await prisma.plant.findUnique({ where: { id: item.plant_id } })
+		if (!plant || plant.stock < item.quantity) {
+			return NextResponse.json(
+				{ error: `Stock insuffisant pour la plante ${item.plant_id}` },
+				{ status: 400 }
+
+			)
+		}
+		total += plant.price * item.quantity
+		await prisma.plant.update({
+			where: { id: plant.id },
+			data: { stock: plant.stock - item.quantity }
+		})
+		await prisma.orderItem.create({
+			data: { orderId: order.id, plantId: plant.id, quantity: item.quantity }
+		})
+	}
+	const updatedOrder = await prisma.order.update({
+		where: { id: order.id },
+		data: { totalPrice: total }
+	})
+	return NextResponse.json(updatedOrder)
+}
+
+
+## src/app/api/orders/[id]/route.ts
+
+import { NextResponse } from "next/server"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
+
+export async function GET(request: Request, { params }: { params: { id: string } }) {
+  const id = Number((await params).id)
+  const order = await prisma.order.findUnique({
+    where: { id },
+    include: { orderItems: true }
+  })
+  if (!order) return NextResponse.json({ error: "Order not found" }, { status: 404 })
+  return NextResponse.json(order)
+}
+
+export async function PUT(request: Request, { params }: { params: { id: string } }) {
+  const id = Number((await params).id)
+  const data = await request.json()
+  const order = await prisma.order.update({ where: { id }, data })
+  return NextResponse.json(order)
+}
+
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+  const id = Number((await params).id)
+  await prisma.order.delete({ where: { id } })
+  return NextResponse.json({ message: "Order deleted" })
+}
+
+
+## src/app/api/auth/[...nextauth]/route.ts
+
+import NextAuth, { NextAuthOptions, DefaultSession, Session } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import { JWT } from "next-auth/jwt";
+import { PrismaClient } from "@prisma/client";
+import * as bcrypt from "bcryptjs";
+
+const prisma = new PrismaClient();
+
+// Extend DefaultSession to add id and admin on user
+declare module "next-auth" {
+	interface Session extends DefaultSession {
+		user: DefaultSession["user"] & {
+			id: string;
+			admin?: boolean;
+		};
+	}
+}
+
+export const authOptions: NextAuthOptions = {
+	providers: [
+		CredentialsProvider({
+			name: "Credentials",
+			credentials: {
+				email: { label: "Email", type: "email" },
+				password: { label: "Password", type: "password" },
+			},
+			async authorize(credentials) {
+				if (!credentials?.email || !credentials?.password) return null;
+				const user = await prisma.user.findUnique({
+					where: { email: credentials.email },
+				});
+				if (!user) return null;
+				const isValid = await bcrypt.compare(
+					credentials.password,
+					user.password
+				);
+				if (!isValid) return null;
+				return {
+					id: user.id.toString(),
+					email: user.email,
+					name: user.name ?? undefined,
+					admin: user.admin,
+				};
+			},
+		}),
+	],
+	callbacks: {
+		async jwt({ token, user }): Promise<JWT> {
+			if (user) {
+				type UserWithExtras = {
+					id: string;
+					admin?: boolean;
+				};
+
+				const u = user as UserWithExtras;
+				token.sub = u.id;
+				token.admin = u.admin;
+			}
+			return token;
+		},
+		async session({ session, token }): Promise<Session> {
+			// Cast so TS won’t complain about our additions
+			const u = session.user as Session["user"] & { id?: string; admin?: boolean };
+			if (token.sub) u.id = token.sub;
+			u.admin = token.admin as boolean;
+			return session;
+		},
+	},
+	session: { strategy: "jwt" },
+	secret: process.env.NEXTAUTH_SECRET,
+};
+
+const handler = NextAuth(authOptions);
+export { handler as GET, handler as POST };
+
+
+## src/app/api/users/route.ts
+
+import { NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+import bcrypt from "bcryptjs";
+const prisma = new PrismaClient();
+
+export async function GET() {
+	const users = await prisma.user.findMany({
+		orderBy: [{ admin: "desc" }, { name: "asc" }],
+	});
+
+	return NextResponse.json(users);
+}
+
+export async function POST(request: Request) {
+	const data = await request.json();
+	// console.log("Données reçues à l'inscription :", data); // log reçu
+	console.log(
+		"Inscription reçue : email =",
+		data.email,
+		"name =",
+		data.name,
+		"password (en clair) =",
+		data.password
+	);
+
+	try {
+		const hashedPassword = await bcrypt.hash(data.password, 10);
+		const user = await prisma.user.create({
+			data: {
+				email: data.email,
+				name: data.name,
+				password: hashedPassword,
+			},
+		});
+		console.log("Utilisateur créé en base :", user); // log base
+		return NextResponse.json(user);
+	} catch (exception: unknown) {
+		if (typeof exception === "object" && exception && "code" in exception && (exception as { code: string }).code === "P2002") {
+			return NextResponse.json(
+				{ error: "Cet email existe déjà." },
+				{ status: 400 }
+			);
+		}
+		return NextResponse.json(
+			{ error: "Erreur lors de la création de l'utilisateur." },
+			{ status: 500 }
+		);
+	}
+}
+
+
+## src/app/api/users/[id]/route.ts
+
+import { NextResponse } from "next/server"
+import { PrismaClient } from "@prisma/client"
+
+const prisma = new PrismaClient()
+
+export async function GET(request: Request, { params }: { params: { id: string } }) {
+  const { id: paramId } = await params
+  const id = Number(paramId)
+  const user = await prisma.user.findUnique({ where: { id } })
+  if (!user) return NextResponse.json({ error: "User not found" }, { status: 404 })
+  return NextResponse.json(user)
+}
+
+export async function PUT(request: Request, { params }: { params: { id: string } }) {
+  const id = Number((await params).id)
+  const data = await request.json()
+  const user = await prisma.user.update({ where: { id }, data })
+  return NextResponse.json(user)
+}
+
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+  const id = Number((await params).id)
+  await prisma.user.delete({ where: { id } })
+  return NextResponse.json({ message: "User deleted" })
+}
+
+
+## src/app/plants/new/page.tsx
+
+"use client"
+import { useRouter } from "next/navigation"
+import { useState, FormEvent } from "react"
+
+type PlantForm = {
+	name: string
+	price: number
+	description: string
+	stock: number
+}
+
+export default function PlantNewPage() {
+	const router = useRouter()
+	const [form, setForm] = useState<PlantForm>({
+		name: "",
+		price: 0,
+		description: "",
+		stock: 0
+	})
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = e.target
+		setForm(prev => ({ ...prev, [name]: name === "price" || name === "stock" ? Number(value) : value }))
+	}
+
+	const handleSubmit = async (e: FormEvent) => {
+		e.preventDefault()
+		await fetch("/api/plants", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(form)
+		})
+		router.push("/plants")
+	}
+
+	return (
+		<div className="container mt-4">
+			<h1 className="mb-4">Nouvelle Plante 🌱</h1>
+			<form onSubmit={handleSubmit}>
+				<div className="mb-3">
+					<label htmlFor="name" className="form-label">Nom de la plante</label>
+					<input id="name" name="name" type="text" className="form-control" value={form.name} onChange={handleChange} required />
+				</div>
+				<div className="mb-3">
+					<label htmlFor="price" className="form-label">Prix (€)</label>
+					<input id="price" name="price" type="number" className="form-control" value={form.price} onChange={handleChange} required />
+				</div>
+				<div className="mb-3">
+					<label htmlFor="description" className="form-label">Description</label>
+					<textarea id="description" name="description" rows={5} className="form-control" value={form.description} onChange={handleChange} />
+				</div>
+				<div className="mb-3">
+					<label htmlFor="stock" className="form-label">Stock</label>
+					<input id="stock" name="stock" type="number" className="form-control" value={form.stock} onChange={handleChange} required />
+				</div>
+				<button type="submit" className="btn btn-primary w-100">Créer</button>
+			</form>
+		</div>
+	)
+}
+
+
+## src/app/plants/page.tsx
+
+"use client";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+
+type Plant = {
+	id: number;
+	name: string;
+	price: number;
+	description?: string;
+	stock: number;
+};
+
+type Cart = {
+	add: (id: number, name: string, price: number, stock: number) => void;
+};
+
+export default function PlantsPage() {
+	const [plants, setPlants] = useState<Plant[]>([]);
+	const [isAdmin, setIsAdmin] = useState(false);
+
+	// Récupérer plantes et rôle utilisateur (admin) au montage
+	useEffect(() => {
+		// Récupérer les plantes
+		fetch("/api/plants")
+			.then((res) => res.json())
+			.then((data) => setPlants(data));
+
+		// Récupérer session / rôle admin (simplifié)
+		fetch("/api/auth/session")
+			.then((res) => res.json())
+			.then((session) => setIsAdmin(session?.user?.admin ?? false));
+	}, []);
+
+	return (
+		<>
+			<h1 className="text-center mb-4">🌿 Liste des Plantes</h1>
+			{isAdmin && (
+				<Link href="/admin/plants/new" className="btn btn-success mb-3">
+					Nouvelle Plante
+				</Link>
+			)}
+			<div className="row">
+				{plants.map((plant) => (
+					<div className="col-md-4" key={plant.id}>
+						<div className="card mb-4 shadow-sm">
+							<div className="card-body">
+								<h5 className="card-title">
+									<Link
+										href={`/plants/${plant.id}`}
+										className="text-decoration-none text-dark"
+									>
+										{plant.name}
+									</Link>
+								</h5>
+								<p className="card-text">
+									<strong>Prix :</strong> {plant.price} €
+									<br />
+									{isAdmin && (
+										<>
+											<strong>Stock :</strong>{" "}
+											{plant.stock} unités
+										</>
+									)}
+								</p>
+								<button
+									className="btn btn-success w-100"
+									onClick={() => {
+										const win = window as unknown as {
+											cartInstance?: Cart;
+										};
+										if (
+											typeof window !== "undefined" &&
+											win.cartInstance
+										) {
+											win.cartInstance.add(
+												plant.id,
+												plant.name,
+												plant.price,
+												plant.stock
+											);
+										}
+									}}
+								>
+									Ajouter au panier
+								</button>
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</>
+	);
+}
+
+
+## src/app/plants/[id]/edit/page.tsx
+
+"use client"
+import { useParams, useRouter } from "next/navigation"
+import { useEffect, useState, FormEvent } from "react"
+
+type PlantForm = {
+	name: string
+	price: number
+	description: string
+	stock: number
+}
+
+export default function PlantEditPage() {
+	const params = useParams()
+	const router = useRouter()
+	const [form, setForm] = useState<PlantForm>({
+		name: "",
+		price: 0,
+		description: "",
+		stock: 0
+	})
+	const [loading, setLoading] = useState(true)
+
+	useEffect(() => {
+		if (!params?.id) return
+		fetch(`/api/plants/${params.id}`)
+			.then(res => res.json())
+			.then(data => {
+				setForm({
+					name: data.name || "",
+					price: data.price || 0,
+					description: data.description || "",
+					stock: data.stock || 0
+				})
+				setLoading(false)
+			})
+	}, [params?.id])
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+		const { name, value } = e.target
+		setForm(prev => ({ ...prev, [name]: name === "price" || name === "stock" ? Number(value) : value }))
+	}
+
+	const handleSubmit = async (e: FormEvent) => {
+		e.preventDefault()
+		if (!params?.id) return
+		await fetch(`/api/plants/${params.id}`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(form)
+		})
+		router.push(`/plants/${params.id}`)
+	}
+
+	if (loading) return <p>Chargement...</p>
+
+	return (
+		<div className="container mt-4">
+			<h1 className="mb-4">Modifier la plante 🛠️</h1>
+			<form onSubmit={handleSubmit}>
+				<div className="mb-3">
+					<label htmlFor="name" className="form-label">Nom de la plante</label>
+					<input id="name" name="name" type="text" className="form-control" value={form.name} onChange={handleChange} required />
+				</div>
+				<div className="mb-3">
+					<label htmlFor="price" className="form-label">Prix (€)</label>
+					<input id="price" name="price" type="number" className="form-control" value={form.price} onChange={handleChange} required />
+				</div>
+				<div className="mb-3">
+					<label htmlFor="description" className="form-label">Description</label>
+					<textarea id="description" name="description" rows={5} className="form-control" value={form.description} onChange={handleChange} />
+				</div>
+				<div className="mb-3">
+					<label htmlFor="stock" className="form-label">Stock</label>
+					<input id="stock" name="stock" type="number" className="form-control" value={form.stock} onChange={handleChange} required />
+				</div>
+				<button type="submit" className="btn btn-primary w-100">Mettre à jour</button>
+			</form>
+		</div>
+	)
+}
+
+
+## src/app/plants/[id]/page.tsx
+
+"use client"
+import Link from "next/link"
+import { useParams, useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { deleteAndCheck } from "@/utils/deleteAndCheck"
+
+type Plant = {
+	id: number
+	name: string
+	price: number
+	description?: string
+	stock: number
+}
+
+export default function PlantShowPage() {
+	const params = useParams()
+	const router = useRouter()
+	const [plant, setPlant] = useState<Plant | null>(null)
+	const [isAdmin, setIsAdmin] = useState(false)
+
+	useEffect(() => {
+		if (!params?.id) return
+		fetch(`/api/plants/${params.id}`)
+			.then(res => res.json())
+			.then(data => setPlant(data))
+
+		fetch("/api/auth/session")
+			.then(res => res.json())
+			.then(session => setIsAdmin(session?.user?.admin ?? false))
+	}, [params?.id])
+
+	const addToCart = (id: number, name: string, price: number) => {
+		// TODO: Implémenter la logique d'ajout au panier
+		alert(`Ajouter au panier : ${name} (${id}), prix : ${price} €`)
+	}
+
+	if (!plant) return <p>Chargement...</p>
+
+	return (
+		<div className="card shadow-lg">
+			<div className="card-body">
+				<h1 className="card-title">{plant.name}</h1>
+				<p><strong>Prix :</strong> {plant.price} €</p>
+				<p><strong>Description :</strong> {plant.description}</p>
+				{isAdmin && <p><strong>Stock :</strong> {plant.stock} unités</p>}
+				<div className="d-flex flex-wrap gap-2 mb-2">
+					<button
+						className="btn btn-success"
+						onClick={() => addToCart(plant.id, plant.name, plant.price)}
+					>
+						Ajouter au panier
+					</button>
+					{isAdmin && (
+						<>
+							<Link href={`/admin/plants/${plant.id}/edit`} className="btn btn-warning">
+								Modifier
+							</Link>
+							<button
+								type="button"
+								className="btn btn-danger"
+								onClick={async () => {
+									if (!confirm("Supprimer cette plante ?")) return
+									await deleteAndCheck(
+										`/api/admin/plants/${plant.id}`,
+										`/api/plants/${plant.id}`,
+										() => router.push("/plants")
+									)
+								}}
+							>
+								Supprimer
+							</button>
+						</>
+					)}
+				</div>
+				<div className="mt-3">
+					<Link href="/plants" className="btn btn-secondary">
+						Retour à la liste
+					</Link>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+
+## src/app/BootstrapScript.tsx
+
+"use client";
+
+import { useEffect } from "react";
+
+export default function BootstrapScript() {
+	useEffect(() => {
+		const script = document.createElement("script");
+		script.src = "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js";
+		script.defer = true;
+		document.body.appendChild(script);
+	}, []);
+
+	return null;
+}
+
+
+## src/app/orders/new/OrderNewPageClient.tsx
+
+"use client";
+
+import { useEffect, useState, FormEvent } from "react";
+
+export default function OrderNewPageClient({ userId }: { userId: number }) {
+	type CartItem = {
+		id: number;
+		name: string;
+		price: number;
+		quantity: number;
+	};
+	const [cartItems, setCartItems] = useState<CartItem[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [alert, setAlert] = useState("");
+
+	useEffect(() => {
+		const stored = localStorage.getItem("cart");
+		if (stored) {
+			let parsed = JSON.parse(stored);
+			if (!Array.isArray(parsed) && typeof parsed === "object") {
+				parsed = Object.values(parsed);
+			}
+			setCartItems(parsed);
+		}
+		setLoading(false);
+	}, []);
+
+	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+		e.preventDefault();
+		const items = cartItems.map(({ id, quantity }) => ({
+			plant_id: id,
+			quantity,
+		}));
+		const res = await fetch("/api/orders", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ items, userId }),
+		});
+		if (res.ok) {
+			localStorage.removeItem("cart");
+			window.location.href = "/orders";
+		} else {
+			const data = await res.json();
+			setAlert(
+				data.message || "Erreur lors de la validation de la commande."
+			);
+		}
+	}
+
+	if (loading)
+		return (
+			<p className="alert alert-info">Chargement de votre panier...</p>
+		);
+
+	return (
+		<div>
+			<h1 className="text-center mb-4">Valider ma commande</h1>
+			{alert && <div className="alert alert-danger">{alert}</div>}
+
+			<div id="order-review-container">
+				{cartItems.length === 0 ? (
+					<p className="alert alert-info">Votre panier est vide.</p>
+				) : (
+					<table className="table shadow">
+						<thead className="table-light">
+							<tr>
+								<th>Plante</th>
+								<th>Quantité</th>
+								<th>Total</th>
+							</tr>
+						</thead>
+						<tbody>
+							{cartItems.map((item) => (
+								<tr key={item.id}>
+									<td>
+										<a
+											href={`/plants/${item.id}`}
+											className="cart-plant-link"
+										>
+											{item.name}
+										</a>
+									</td>
+									<td>{item.quantity}</td>
+									<td>{item.price * item.quantity} €</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				)}
+				{cartItems.length > 0 && (
+					<p className="text-end fw-bold">
+						Total :{" "}
+						{cartItems.reduce(
+							(t, item) => t + item.price * item.quantity,
+							0
+						)}
+						 €
+					</p>
+				)}
+			</div>
+
+			<form id="order-form" onSubmit={handleSubmit}>
+				<button type="submit" className="btn btn-success w-100 mt-3">
+					Confirmer la commande
+				</button>
+			</form>
+		</div>
+	);
+}
+
+
+## src/app/orders/new/page.tsx
+
+// # Importations
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"
+import OrderNewPageClient from "./OrderNewPageClient"
+
+// # Main
+export default async function OrderNewPageWrapper() {
+	const session = await getServerSession(authOptions)
+	const userId = session?.user?.id
+
+	if (!userId) {
+		return <p className="alert alert-danger">Utilisateur non connecté.</p>
+	}
+
+	return <OrderNewPageClient userId={Number(userId)} />
+}
+
+
+## src/app/orders/page.tsx
+
+"use client"
+import Link from "next/link"
+import { useEffect, useState } from "react"
+
+type OrderItem = {
+  id: number
+  quantity: number
+  plant: {
+    id: number
+    name: string
+    price: number
+  }
+}
+
+type Order = {
+  id: number
+  createdAt: string
+  totalPrice: number
+  status: string
+  orderItems: OrderItem[]
+}
+
+export default function OrdersPage() {
+  const [orders, setOrders] = useState<Order[]>([])
+
+  useEffect(() => {
+    fetch("/api/orders")
+      .then((res) => res.json())
+      .then((data) => setOrders(data))
+  }, [])
+
+  return (
+    <>
+      <h1 className="text-center mb-4">📜 Mes Commandes</h1>
+      {orders.length > 0 ? (
+        orders.map((order, index) => (
+          <div className="card mb-3 shadow-sm" key={order.id}>
+            <div className="card-body">
+              <h5 className="card-title">Commande n°{orders.length - index}</h5>
+              <p className="mb-1 text-muted">
+                Passée le {new Date(order.createdAt).toLocaleString()} – Total : {order.totalPrice} €
+              </p>
+              <ul className="mb-2">
+                {order.orderItems.map((item) => (
+                  <li key={item.id}>
+                    <Link
+                      href={`/plants/${item.plant.id}`}
+                      className="text-decoration-none text-primary"
+                    >
+                      {item.plant.name}
+                    </Link>{" "}
+                    {item.quantity} × {item.plant.price} €
+                  </li>
+                ))}
+              </ul>
+              <p>
+                <strong>Statut :</strong> {order.status}
+              </p>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p className="alert alert-info">Aucune commande pour le moment.</p>
+      )}
+    </>
+  )
+}
+
+
+## src/app/layout.tsx
+
+import Navbar from "./components/Navbar";
+import { Providers } from "./providers";
+import CartProvider from "./components/CartProvider";
+import BootstrapScript from "./BootstrapScript"
+
+export const metadata = {
+	title: "Magasin de Plantes",
+};
+
+export default function RootLayout({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
+	return (
+		<html lang="fr" suppressHydrationWarning={true}>
+			<head>
+				<meta charSet="UTF-8" />
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1.0"
+				/>
+				<title>Magasin de Plantes</title>
+				<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+				{/* Boostrap */}
+				<link
+					href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+					rel="stylesheet"
+				/>
+				{/* CSS maison */}
+				<link rel="stylesheet" href="/stylesheets/application.css" />
+			</head>
+			<body>
+				<Providers>
+					<Navbar />
+					<CartProvider />
+					<div className="container mt-4">{children}</div>
+				</Providers>
+				{/* Boostrap JS */}
+				{/* <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" /> */}
+				<BootstrapScript />
+				{/* JS pour la gestion du panier -> remplacé par un JSX */}
+				{/* <script src="/javascripts/application.js" /> */}
+				{/* <script src="/javascripts/application.js"></script> */}
+			</body>
+		</html>
+	);
+}
+
+
+## src/app/page.tsx
+
+import { redirect } from "next/navigation"
+
+export default function Home() {
+	redirect("/plants")
+}
+
+
+## src/app/providers.tsx
+
+"use client";
+
+import { SessionProvider, useSession, signOut } from "next-auth/react";
+import { useEffect } from "react";
+
+function SessionChecker() {
+	const { data: session } = useSession();
+
+	useEffect(() => {
+		if (!session?.user?.id) return;
+		fetch(`/api/users/${(session.user as { id: string }).id}`).then(
+			(res) => {
+				if (!res.ok) signOut();
+			}
+		);
+	}, [session?.user?.id]);
+
+	return null;
+}
+
+export function Providers({ children }: { children: React.ReactNode }) {
+	return (
+		<SessionProvider>
+			<SessionChecker />
+			{children}
+		</SessionProvider>
+	);
+}
+
+
+## src/app/auth/register/page.tsx
+
+"use client"
+import { useState, FormEvent } from "react"
+import { useRouter } from "next/navigation"
+
+export default function RegisterPage() {
+	const router = useRouter()
+	const [email, setEmail] = useState("")
+	const [name, setName] = useState("")
+	const [password, setPassword] = useState("")
+	const [passwordConfirmation, setPasswordConfirmation] = useState("")
+	const [error, setError] = useState("")
+
+	async function handleSubmit(e: FormEvent) {
+		e.preventDefault()
+		if (password !== passwordConfirmation) {
+			setError("Passwords do not match")
+			return
+		}
+		const res = await fetch("/api/users", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ email, name, password })
+		})
+		if (!res.ok) {
+			const data = await res.json()
+			setError(data.message || "Registration failed")
+		} else {
+			router.push("/auth/signin")
+		}
+	}
+
+	return (
+		<div className="container mt-4">
+			<h1>S&apos;inscrire</h1>
+			<form onSubmit={handleSubmit} className="mt-3 w-100" style={{ maxWidth: '500px' }}>
+				<div className="mb-3">
+					<label htmlFor="email" className="form-label">
+						Email
+					</label>
+					<input
+						id="email"
+						type="email"
+						className="form-control"
+						value={email}
+						onChange={e => setEmail(e.target.value)}
+						required
+					/>
+				</div>
+				<div className="mb-3">
+					<label htmlFor="name" className="form-label">
+						Nom
+					</label>
+					<input
+						id="name"
+						type="text"
+						className="form-control"
+						value={name}
+						onChange={e => setName(e.target.value)}
+						required
+					/>
+				</div>
+				<div className="mb-3">
+					<label htmlFor="password" className="form-label">
+						Mot de passe
+					</label>
+					<input
+						id="password"
+						type="password"
+						className="form-control"
+						value={password}
+						onChange={e => setPassword(e.target.value)}
+						required
+					/>
+				</div>
+				<div className="mb-3">
+					<label htmlFor="passwordConfirmation" className="form-label">
+						Confirmation
+					</label>
+					<input
+						id="passwordConfirmation"
+						type="password"
+						className="form-control"
+						value={passwordConfirmation}
+						onChange={e => setPasswordConfirmation(e.target.value)}
+						required
+					/>
+				</div>
+				{error && <div className="alert alert-danger">{error}</div>}
+				<button type="submit" className="btn btn-primary">
+					S&apos;inscrire
+				</button>
+			</form>
+		</div>
+	)
+}
+
+
+## src/app/auth/signin/page.tsx
+
+"use client"
+import { useState, FormEvent } from "react"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
+
+export default function SignInPage() {
+	const router = useRouter()
+	const [email, setEmail] = useState("")
+	const [password, setPassword] = useState("")
+	const [error, setError] = useState("")
+
+	async function handleSubmit(e: FormEvent) {
+		e.preventDefault()
+		const res = await signIn("credentials", {
+			redirect: false,
+			email,
+			password
+		})
+		if (res?.error) setError("Invalid email or password")
+		else router.push("/")
+	}
+
+	return (
+		<div className="container mt-4">
+			<h1>Se Connecter</h1>
+			<form onSubmit={handleSubmit} className="mt-3 w-100" style={{ maxWidth: '500px' }}>
+				<div className="mb-3">
+					<label className="form-label">Email</label>
+					<input
+						type="email"
+						className="form-control"
+						value={email}
+						onChange={e => setEmail(e.target.value)}
+						required
+					/>
+				</div>
+				<div className="mb-3">
+					<label className="form-label">Mot de passe</label>
+					<input
+						type="password"
+						className="form-control"
+						value={password}
+						onChange={e => setPassword(e.target.value)}
+						required
+					/>
+				</div>
+				{error && <div className="alert alert-danger">{error}</div>}
+				<button type="submit" className="btn btn-primary">
+					Se connecter
+				</button>
+			</form>
+		</div>
+	)
+}
+
+
+## src/app/users/[id]/edit/page.tsx
+
+"use client"
+import { useParams, useRouter } from "next/navigation"
+import { useEffect, useState, FormEvent } from "react"
+
+type UserForm = {
+	email: string
+	name: string
+}
+
+type Errors = string[]
+
+export default function UserEditPage() {
+	const params = useParams()
+	const router = useRouter()
+	const [form, setForm] = useState<UserForm>({ email: "", name: "" })
+	const [errors, setErrors] = useState<Errors>([])
+	const [loading, setLoading] = useState(true)
+
+	useEffect(() => {
+		if (!params?.id) return
+		fetch(`/api/users/${params.id}`)
+			.then(res => res.json())
+			.then(data => {
+				setForm({ email: data.email || "", name: data.name || "" })
+				setLoading(false)
+			})
+	}, [params?.id])
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target
+		setForm(prev => ({ ...prev, [name]: value }))
+	}
+
+	const handleSubmit = async (e: FormEvent) => {
+		e.preventDefault()
+		if (!params?.id) return
+		const res = await fetch(`/api/users/${params.id}`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(form)
+		})
+		if (res.ok) {
+			router.push(`/users/${params.id}`)
+		} else {
+			const data = await res.json()
+			setErrors(data.errors || ["Échec de la mise à jour de l'utilisateur."])
+		}
+	}
+
+	if (loading) return <p>Chargement...</p>
+
+	return (
+		<div className="container mt-4">
+			<h1>Modifier mon profil</h1>
+
+			{errors.length > 0 && (
+				<div className="alert alert-danger">
+					<ul>
+						{errors.map((error, idx) => (
+							<li key={idx}>{error}</li>
+						))}
+					</ul>
+				</div>
+			)}
+
+			<form onSubmit={handleSubmit}>
+				<div className="mb-3">
+					<label htmlFor="email" className="form-label">
+						Email
+					</label>
+					<input
+						type="email"
+						id="email"
+						name="email"
+						className="form-control"
+						value={form.email}
+						onChange={handleChange}
+						required
+					/>
+				</div>
+				<div className="mb-3">
+					<label htmlFor="name" className="form-label">
+						Nom
+					</label>
+					<input
+						type="text"
+						id="name"
+						name="name"
+						className="form-control"
+						value={form.name}
+						onChange={handleChange}
+					/>
+				</div>
+				<button type="submit" className="btn btn-primary">
+					Enregistrer
+				</button>
+			</form>
+		</div>
+	)
+}
+
+
+## src/app/users/[id]/page.tsx
+
+"use client"
+import Link from "next/link"
+import { useParams } from "next/navigation"
+import { useEffect, useState } from "react"
+
+type User = {
+	id: number
+	email: string
+	name?: string | null
+}
+
+export default function UserProfilePage() {
+	const params = useParams()
+	const [user, setUser] = useState<User | null>(null)
+
+	useEffect(() => {
+		if (!params?.id) return
+		fetch(`/api/users/${params.id}`)
+			.then(res => res.json())
+			.then(data => setUser(data))
+	}, [params?.id])
+
+	if (!user) return <p>Chargement...</p>
+
+	return (
+		<div className="container mt-4">
+			<h1>Mon Profil</h1>
+			{user.name && (
+				<p>
+					<strong>Nom :</strong> {user.name}
+				</p>
+			)}
+			<p>
+				<strong>Email :</strong> {user.email}
+			</p>
+			<Link href={`/users/${user.id}/edit`} className="btn btn-primary">
+				Modifier mon profil
+			</Link>
+		</div>
+	)
+}
+
+
+
+# STATISTIQUES
+#
+      1 ## .env
+      1 ## .eslintrc.json
+      1 ## Makefile
+      2 ## next.config.ts
+      1 ## next-env.d.ts
+      1 ## package.json
+      1 ## prisma
+      2 ## public
+     39 ## src
+      1 ## tsconfig.json
