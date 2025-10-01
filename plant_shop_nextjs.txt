@@ -7,6 +7,7 @@
 ├── next-env.d.ts
 ├── package.json
 ├── package-lock.json
+├── plant_shop_nextjs.txt
 ├── prisma
 │   ├── migrations
 │   │   ├── 20250606000932_init
@@ -116,7 +117,7 @@
 ├── tsconfig.tsbuildinfo
 └── users.txt
 
-49 directories, 65 files
+49 directories, 66 files
 
 # CONFIG
 #
@@ -669,7 +670,7 @@ export async function middleware(req: NextRequest) {
 	// Cas 2 : pas admin mais accès à /admin → redirection unauthorized
 	if (token && !token.admin && pathname.startsWith("/admin")) {
 		const url = req.nextUrl.clone();
-		url.pathname = "/unauthorized";
+		url.pathname = "/plants";
 		return NextResponse.redirect(url);
 	}
 
