@@ -22,7 +22,7 @@ export async function middleware(req: NextRequest) {
 	// Cas 2 : pas admin mais accès à /admin → redirection unauthorized
 	if (token && !token.admin && pathname.startsWith("/admin")) {
 		const url = req.nextUrl.clone();
-		url.pathname = "/unauthorized";
+		url.pathname = "/plants";
 		return NextResponse.redirect(url);
 	}
 
