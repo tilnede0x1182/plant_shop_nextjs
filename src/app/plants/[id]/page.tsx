@@ -29,10 +29,10 @@ export default function PlantShowPage() {
 			.then(session => setIsAdmin(session?.user?.admin ?? false))
 	}, [params?.id])
 
-	const addToCart = (id: number, name: string, price: number) => {
-		// TODO: Implémenter la logique d'ajout au panier
-		alert(`Ajouter au panier : ${name} (${id}), prix : ${price} €`)
-	}
+	type Cart = {
+		add: (id: number, name: string, price: number, stock: number) => void;
+	};
+
 
 	if (!plant) return <p>Chargement...</p>
 
@@ -40,16 +40,30 @@ export default function PlantShowPage() {
 		<div className="card shadow-lg">
 			<div className="card-body">
 				<h1 className="card-title">{plant.name}</h1>
-				<p><strong>Prix :</strong> {plant.price} €</p>
-				<p><strong>Description :</strong> {plant.description}</p>
-				{isAdmin && <p><strong>Stock :</strong> {plant.stock} unités</p>}
+				<p>
+					<strong>Prix :</strong> {plant.price} €
+				</p>
+				<p>
+					<strong>Description :</strong> {plant.description}
+				</p>
+				{isAdmin && (
+					<p>
+						<strong>Stock :</strong> {plant.stock} unités
+					</p>
+				)}
 				<div className="d-flex flex-wrap gap-2 mb-2">
 					<button
 						className="btn btn-success"
-						onClick={() => addToCart(plant.id, plant.name, plant.price)}
+						onClick={() => {
+							const win = window as unknown as { cartInstance?: Cart };
+							if (typeof window !== "undefined" && win.cartInstance && plant) {
+								win.cartInstance.add(plant.id, plant.name, plant.price, plant.stock);
+							}
+						}}
 					>
 						Ajouter au panier
 					</button>
+
 					{isAdmin && (
 						<>
 							<Link href={`/admin/plants/${plant.id}/edit`} className="btn btn-warning">
@@ -59,12 +73,8 @@ export default function PlantShowPage() {
 								type="button"
 								className="btn btn-danger"
 								onClick={async () => {
-									if (!confirm("Supprimer cette plante ?")) return
-									await deleteAndCheck(
-										`/api/admin/plants/${plant.id}`,
-										`/api/plants/${plant.id}`,
-										() => router.push("/plants")
-									)
+									if (!confirm("Supprimer cette plante ?")) return;
+									await deleteAndCheck(`/api/admin/plants/${plant.id}`, `/api/plants/${plant.id}`, () => router.push("/plants"));
 								}}
 							>
 								Supprimer
@@ -79,5 +89,5 @@ export default function PlantShowPage() {
 				</div>
 			</div>
 		</div>
-	)
+	);
 }

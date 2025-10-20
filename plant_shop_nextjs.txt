@@ -88,6 +88,7 @@
 │   │   │   ├── FlashMessages.tsx
 │   │   │   └── Navbar.tsx
 │   │   ├── layout.tsx
+│   │   ├── not-found.tsx
 │   │   ├── orders
 │   │   │   ├── new
 │   │   │   │   ├── OrderNewPageClient.tsx
@@ -117,7 +118,7 @@
 ├── tsconfig.tsbuildinfo
 └── users.txt
 
-49 directories, 66 files
+49 directories, 67 files
 
 # CONFIG
 #
@@ -696,6 +697,16 @@ export default function CartPage() {
       <div id="cart-container" />
     </div>
   );
+}
+
+
+## src/app/not-found.tsx
+
+import { redirect } from "next/navigation";
+
+// Toute 404 → redirection vers /plants
+export default function NotFound() {
+	redirect("/plants");
 }
 
 
@@ -3121,5 +3132,5 @@ export default function UserProfilePage() {
       1 ## package.json
       1 ## prisma
       2 ## public
-     39 ## src
+     40 ## src
       1 ## tsconfig.json
