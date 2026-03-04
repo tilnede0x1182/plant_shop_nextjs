@@ -37,7 +37,10 @@ const PLANT_NAMES = [
 class SeedService {
 	private prisma = new PrismaClient()
 
-	// ## Reset
+	/**
+	 * Supprime toutes les donnees de la base.
+	 * @return {Promise<void>}
+	 */
 	private reset = async (): Promise<void> => {
 		await this.prisma.orderItem.deleteMany()
 		await this.prisma.order.deleteMany()
@@ -45,13 +48,21 @@ class SeedService {
 		await this.prisma.user.deleteMany()
 	}
 
-	// ## Admins
+	/**
+	 * Cree les comptes administrateurs.
+	 * @return {Promise<Array<{email: string; password: string}>>} Liste des admins crees
+	 */
 	private createAdmins = async () => {
 		const admins: { email: string; password: string }[] = []
 		for (let idx = 0; idx < NB_ADMINS; idx++) admins.push(await this.addAdmin(idx))
 		return admins
 	}
 
+	/**
+	 * Ajoute un administrateur.
+	 * @param {number} index - Index de l'admin
+	 * @return {Promise<{email: string; password: string}>}
+	 */
 	private addAdmin = async (index: number) => {
 		const email = `admin${index + 1}@planteshop.com`
 		const password = 'password'
@@ -61,13 +72,20 @@ class SeedService {
 		return { email, password }
 	}
 
-	// ## Users
+	/**
+	 * Cree les comptes utilisateurs.
+	 * @return {Promise<Array<{email: string; password: string}>>} Liste des users crees
+	 */
 	private createUsers = async () => {
 		const users: { email: string; password: string }[] = []
 		for (let idx = 0; idx < NB_USERS; idx++) users.push(await this.addUser())
 		return users
 	}
 
+	/**
+	 * Ajoute un utilisateur.
+	 * @return {Promise<{email: string; password: string}>}
+	 */
 	private addUser = async () => {
 		const password = faker.internet.password({ length: 12 })
 		const email = faker.internet.email().toLowerCase()
@@ -77,7 +95,10 @@ class SeedService {
 		return { email, password }
 	}
 
-	// ## Plants
+	/**
+	 * Cree les plantes en base.
+	 * @return {Promise<Plant[]>} Liste des plantes creees
+	 */
 	private createPlants = async () => {
 		const max = PLANT_NAMES.length
 		const plants: Plant[] = []
@@ -85,6 +106,12 @@ class SeedService {
 		return plants
 	}
 
+	/**
+	 * Ajoute une plante.
+	 * @param {number} idx - Index de la plante
+	 * @param {number} max - Nombre max de noms
+	 * @return {Promise<Plant>}
+	 */
 	private addPlant = async (idx: number, max: number) => {
 		const base = PLANT_NAMES[idx % max]
 		const name = NB_PLANTS > max ? `${base} ${Math.floor(idx / max) + 1}` : base
@@ -98,7 +125,11 @@ class SeedService {
 		})
 	}
 
-	// ## Orders
+	/**
+	 * Cree les commandes pour chaque utilisateur.
+	 * @param {Plant[]} plants - Liste des plantes disponibles
+	 * @return {Promise<void>}
+	 */
 	private createOrders = async (plants: Plant[]) => {
 		for (const user of await this.prisma.user.findMany()) {
 			const numberOfOrders = faker.number.int({ min: 0, max: MAX_ORDERS_PER_USER })
@@ -108,6 +139,12 @@ class SeedService {
 		}
 	}
 
+	/**
+	 * Cree une commande pour un utilisateur.
+	 * @param {User} user - Utilisateur
+	 * @param {Plant[]} plants - Liste des plantes
+	 * @return {Promise<void>}
+	 */
 	private createOrderForUser = async (user: User, plants: Plant[]) => {
 		let total = 0
 		const order = await this.prisma.order.create({
@@ -117,6 +154,12 @@ class SeedService {
 		await this.prisma.order.update({ where: { id: order.id }, data: { totalPrice: total } })
 	}
 
+	/**
+	 * Ajoute un item a une commande.
+	 * @param {number} orderId - ID de la commande
+	 * @param {Plant[]} plants - Liste des plantes
+	 * @return {Promise<number>} Prix total de l'item
+	 */
 	private addItem = async (orderId: number, plants: Plant[]) => {
 		const plant = plants[Math.floor(Math.random() * plants.length)]
 		if (!plant.stock) return 0
@@ -128,7 +171,12 @@ class SeedService {
 		return plant.price * qty
 	}
 
-	// ## users.txt
+	/**
+	 * Ecrit le fichier users.txt avec les identifiants.
+	 * @param {Array} admins - Liste des admins
+	 * @param {Array} users - Liste des utilisateurs
+	 * @return {void}
+	 */
 	private writeUsersFile = (admins: {email:string;password:string}[], users: {email:string;password:string}[]) => {
 		const path = join(process.cwd(), 'users.txt')
 		let txt = 'Administrateurs :\n\n'
@@ -138,7 +186,10 @@ class SeedService {
 		writeFileSync(path, txt, 'utf8')
 	}
 
-	// # Main
+	/**
+	 * Execute le seed complet de la base de donnees.
+	 * @return {Promise<void>}
+	 */
 	public run = async (): Promise<void> => {
 		await this.reset()
 		const admins = await this.createAdmins()
